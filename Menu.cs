@@ -29,5 +29,25 @@ namespace Riptos
             MenuItem mi = new MenuItem(menuTitle);
             menuItems.Add(mi);  
         }
+        public int GetSelection(string message)
+        {
+            int selection;
+            while (true)
+            {
+                Show();
+                Console.WriteLine("\n" + message);
+                string input = Console.ReadLine();
+                bool Input1 = int.TryParse(input, out selection);
+                if (Input1 == true)
+                {
+                    if (selection >= 1 && selection <= menuItems.Count)
+                    {
+                        return selection - 1;
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
+        
     }
 }
