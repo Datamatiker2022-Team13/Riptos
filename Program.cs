@@ -91,7 +91,7 @@
         {
             Console.Clear();
 
-            Menu Menu = new Menu("Velkommen til medarbejder siden");
+            Menu Menu = new Menu("Velkommen til HR siden");
 
             Menu.AddItem("Vis kalender");
             Menu.AddItem("Send henvendelse");
