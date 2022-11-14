@@ -15,7 +15,7 @@
 
                 MainMenu.AddItem("[TEMP] Vis medarbejder menu");
                 MainMenu.AddItem("[TEMP] Vis HR-Medarbejder menu");
-
+                MainMenu.AddItem("[TEMP] Login menu");
 
                 switch (MainMenu.GetSelection("Vælg handling: "))
                 {
@@ -53,6 +53,9 @@
                         break;
                     case 5:
                         HRMenu();
+                        break;
+                    case 6:
+                        LoginMenu();
                         break;
                 }
             }
@@ -125,6 +128,29 @@
 
                 case 5:
                     Console.WriteLine("[HR] Log ud");
+                    break;
+            }
+        }
+        static void LoginMenu()
+        {
+            Menu Menu = new Menu("Husk at logge ind med din egen konto!");
+
+            Menu.AddItem("Login");
+            Menu.AddItem("Glemt kodeord");
+            Menu.AddItem("Register ny bruger");
+
+            switch (Menu.GetSelection("Vælg handling: "))
+            {
+                case 0:
+                    Console.WriteLine("Login");
+                    break;
+
+                case 1:
+                    Console.WriteLine("Glemt kodeord");
+                    break;
+
+                case 2:
+                    Console.WriteLine("Register ny bruger");
                     break;
             }
         }
