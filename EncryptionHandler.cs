@@ -9,8 +9,9 @@ namespace Riptos
 {
     public class EncryptionHandler
     {
+        private static string key = "b14ca5898a4e4133bbce2ea2315a1916";
 
-        public static string EncryptString(string key, string plainText)
+        public static string EncryptString(string plainText)
         {
             byte[] iv = new byte[16];
             byte[] array;
@@ -39,7 +40,7 @@ namespace Riptos
             return Convert.ToBase64String(array);
         }
 
-        public static string DecryptString(string key, string cipherText)
+        public static string DecryptString(string cipherText)
         {
             byte[] iv = new byte[16];
             byte[] buffer = Convert.FromBase64String(cipherText);
