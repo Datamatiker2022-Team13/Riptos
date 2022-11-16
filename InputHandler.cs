@@ -64,5 +64,22 @@ namespace Riptos
                 Console.WriteLine("Dummy. skriv True/False");
             }
         }
+
+        /// <summary>
+        /// This should be a menu instead!
+        /// </summary>
+        /// <param name="prompt">The question  presented to the user.</param>
+        /// <returns>A valid SubjectType.</returns>
+        public SubjectType GetUserInputSubject (string prompt) {
+            while (true) {
+                Console.WriteLine(prompt); // ex "Indtast emnet her: "
+
+                string input = Console.ReadLine();
+                if (Enum.TryParse(typeof(SubjectType), input, out object? subject))
+                    return (SubjectType)subject;
+                
+                Console.WriteLine("Heya, du må kun skrive emner her - de kendte emner er: <yadda yadda>");
+            }
+        }
     }
 }
