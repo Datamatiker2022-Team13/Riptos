@@ -10,23 +10,23 @@ namespace Riptos
     public class Menu
     {
         public string Title { get; set; }
-        private List<MenuItem> menuItems;
+        private List<string> menuItems;
         public Menu(string title, int size)
         {
             Title = title;
-            menuItems = new List<MenuItem>();
+            menuItems = new List<string>();
         }
-        public void Show()
+        public void Show() //returnre ikke noget en anden classe kan bruge. 
         {
             Console.WriteLine(Title + "\n");
             for (int i = 0; i < menuItems.Count; i++)
             {
-                Console.WriteLine((i + 1) + "TEKST: " + menuItems[i].title);
+                Console.WriteLine((i + 1) + ":" + menuItems[i]);
             }
         }
         public void AddItem(string menuTitle)
         {
-            MenuItem mi = new MenuItem(menuTitle);
+            string mi = menuTitle;
             menuItems.Add(mi);  
         }
         public int GetSelection(string message)
@@ -45,7 +45,10 @@ namespace Riptos
                         return selection - 1;
                     }
                 }
-                Console.WriteLine();
+                Console.WriteLine("Error - wrong input" + message + "Invalid Input");
+                Console.WriteLine("Press any key to try again");
+                Console.ReadKey();
+                Console.Clear();
             }
         }
         
