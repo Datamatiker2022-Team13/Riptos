@@ -23,15 +23,17 @@
         {
             get { return isHR; }
         }
-        public Employee (string name, bool isHR)
+        public Employee (string name, bool isHR, string UserVal, String PassVal)
         {
-            this.username = name;
+            this.name = name;
             this.isHR = isHR;
-        }
-        public void SetUserCredentials(string UserVal, string PassVal)
-        {
             this.username = UserVal;
             this.password = PassVal;
         }
+        //public void SetUserCredentials(string UserVal, string PassVal)
+        //{
+        //    this.username = UserVal;
+        //    this.password = PassVal;
+        //}
     }
 }

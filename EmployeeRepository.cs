@@ -10,13 +10,13 @@ namespace Riptos
     {
         string fileName = @"C:\Users\cappe\Desktop\Getting-Real\Riptos\LoginData.txt";
 
-        public void save(string pass)
+        public void StorageStart(string filename)
         {
             try
             {
-                using (StreamWriter sw = new StreamWriter(fileName, true))
+                if (!File.Exists(fileName))
                 {
-                    sw.WriteLine(pass);
+                    using (FileStream fs = File.Create(filename));
                 }
             }
             catch (Exception ex)
@@ -24,17 +24,40 @@ namespace Riptos
                 Console.WriteLine(ex.Message);
             }
         }
-        public List<string> load()
+
+        public void save(string name, bool isHR, string user, string pass)
         {
             try
             {
+                StorageStart(fileName);
+                using (StreamWriter sw = new StreamWriter(fileName, true))
+                {
+                    sw.WriteLine(name + "," + isHR + "," + user + "," + pass);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        public List<Employee> load()
+        {
+            try
+            {
+                StorageStart(fileName);
                 using (StreamReader sr = new StreamReader(fileName))
                 {
                     string line;
-                    List<string> strings = new List<string>();
+                    List<Employee> strings = new List<Employee>();
                     while (!sr.EndOfStream)
                     {
-                        strings.Add(line = sr.ReadLine());
+                        
+                        line = sr.ReadLine();
+                        string[] tempList = line.Split(",");
+                        Employee emp = new Employee(tempList[0], Convert.ToBoolean(tempList[1]), tempList[2], tempList[3]);
+                        strings.Add(emp);
+                        //strings.Add(line = sr.ReadLine());
+                        
                     }
                     return strings;
                 }
