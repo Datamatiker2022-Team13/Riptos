@@ -29,27 +29,30 @@ namespace Riptos
             string mi = menuTitle;
             menuItems.Add(mi);  
         }
-        public int GetSelection(string message)
+        public int GetSelection(string prompt)
         {
-            int selection;
-            while (true)
-            {
-                Show();
-                Console.WriteLine("\n" + message);
-                string input = Console.ReadLine();
-                bool Input1 = int.TryParse(input, out selection);
-                if (Input1 == true)
-                {
-                    if (selection >= 1 && selection <= menuItems.Count)
-                    {
-                        return selection - 1;
-                    }
-                }
-                Console.WriteLine("Error - wrong input" + message + "Invalid Input");
-                Console.WriteLine("Press any key to try again");
-                Console.ReadKey();
-                Console.Clear();
-            }
+            return InputHandler.GetUserInputInt(prompt, 1, menuItems.Count); 
+
+
+            //int selection;
+            //while (true)
+            //{
+            //    Show();
+            //    Console.WriteLine("\n" + message);
+            //    string input = Console.ReadLine();
+            //    bool Input1 = int.TryParse(input, out selection);
+            //    if (Input1 == true)
+            //    {
+            //        if (selection >= 1 && selection <= menuItems.Count)
+            //        {
+            //            return selection - 1;
+            //        }
+            //    }
+            //    Console.WriteLine("Error - wrong input" + message + "Invalid Input");
+            //    Console.WriteLine("Press any key to try again");
+            //    Console.ReadKey();
+            //    Console.Clear();
+            //}
         }
         
     }
