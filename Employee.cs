@@ -23,7 +23,7 @@
         {
             get { return isHR; }
         }
-        public Employee (string name, bool isHR, string UserVal, String PassVal)
+        public Employee (string name, bool isHR, string UserVal, string PassVal)
         {
             this.name = name;
             this.isHR = isHR;

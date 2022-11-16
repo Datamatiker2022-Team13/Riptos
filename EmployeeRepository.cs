@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,8 @@ namespace Riptos
 {
     public class EmployeeRepository
     {
+        List<Employee> employees = new List<Employee>();
+
         string fileName = @"C:\Users\cappe\Desktop\Getting-Real\Riptos\LoginData.txt";
 
         public void StorageStart(string filename)
@@ -25,14 +28,17 @@ namespace Riptos
             }
         }
 
-        public void save(string name, bool isHR, string user, string pass)
+        EncryptionHandler ec = new EncryptionHandler();
+
+        public void save()
         {
+            
             try
             {
                 StorageStart(fileName);
                 using (StreamWriter sw = new StreamWriter(fileName, true))
                 {
-                    sw.WriteLine(name + "," + isHR + "," + user + "," + pass);
+                    sw.WriteLine(employees[0].Name + "," + employees[0].IsHR + "," + ec.EncryptString(employees[0].Username) + "," + ec.EncryptString(employees[0].Password));
                 }
             }
             catch (Exception ex)
@@ -54,7 +60,7 @@ namespace Riptos
                         
                         line = sr.ReadLine();
                         string[] tempList = line.Split(",");
-                        Employee emp = new Employee(tempList[0], Convert.ToBoolean(tempList[1]), tempList[2], tempList[3]);
+                        Employee emp = new Employee(tempList[0], Convert.ToBoolean(tempList[1]), ec.DecryptString(tempList[2]), ec.DecryptString(tempList[3]));
                         strings.Add(emp);
                         //strings.Add(line = sr.ReadLine());
                         
@@ -68,5 +74,44 @@ namespace Riptos
 
             }
         }
+        public void AddEmployee(Employee employee)
+        {
+            employees.Add(employee);
+        }
+        public void GetEmployee(string username)
+        {
+            for (int i = 0; i < load().Count; i++)
+            {
+                if (load()[i].Username == username)
+                {
+
+                    return;
+                }
+
+            }
+
+        }
+
+        public void UpdateUsername()
+        {
+
+        }
+        public void UpdatePassword()
+        {
+
+        }
+        public void DeleteEmployee()
+        {
+
+        }
+
+
+        
+
+
+
+
+
+
     }
 }
