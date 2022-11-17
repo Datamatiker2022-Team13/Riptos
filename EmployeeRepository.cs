@@ -29,10 +29,12 @@ namespace Riptos
         }
 
         EncryptionHandler ec = new EncryptionHandler();
-
+        
         public void save()
         {
-            
+            //Hvis man gemmer listen igen, vil alle ting i listen blive gemt, dog hvis dette,
+            //allerede har været gjort tidligere vil den gemme de samme ting igen.
+            //Dette skal ændres da det er lort.
             try
             {
                 StorageStart(fileName);
@@ -76,33 +78,58 @@ namespace Riptos
         }
         public void AddEmployee(Employee employee)
         {
-            employees.Add(employee);
-        }
-        public void GetEmployee(string username)
-        {
-            for (int i = 0; i < load().Count; i++)
+            for (int i = 0;i < employees.Count; i++)
             {
-                if (load()[i].Username == username)
+                if (employee.Username == employees[i].Username)
+                {
+                    Console.WriteLine("Dit navn er taget din klump");
+                }
+                else
+                {
+                    employees.Add(employee);
+                }
+            }
+            
+        }
+        public Employee GetEmployee(string username)
+        {
+            for (int i = 0; i < employees.Count; i++)
+            {
+                if (employees[i].Username == username)
                 {
 
-                    return;
+                    return employees[i];
                 }
+            }
+            return null;
 
+        }
+
+        public void UpdateUsername(Employee employee, string username)
+        {
+            for (int i =0; i < employees.Count; i++)
+            {
+                if (employee.Username == employees[i].Username && employee.Password == employees[i].Password)
+                {
+                    employees[i].Username = username;
+                }
+            }
+            
+        }
+        public void UpdatePassword(Employee employee, string password)
+        {
+            for (int i = 0; i < employees.Count; i++)
+            {
+                if (employee.Username == employees[i].Username && employee.Password == employees[i].Password)
+                {
+                    employees[i].Password = password;
+                }
             }
 
         }
-
-        public void UpdateUsername()
+        public void DeleteEmployee(Employee employee)
         {
-
-        }
-        public void UpdatePassword()
-        {
-
-        }
-        public void DeleteEmployee()
-        {
-
+            employees.Remove(employee);
         }
 
 
