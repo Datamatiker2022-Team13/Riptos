@@ -1,0 +1,2 @@
+Peter,False,hej,lort
+Banja,False,Lort,SutterDiller
