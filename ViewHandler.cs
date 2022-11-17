@@ -2,7 +2,7 @@
 {
     public class ViewHandler
     {
-        //private Controller controller;
+        private Controller controller;
         static int sleeper = 1000;
         public Menu LoginMenu { get; set; }
         public Menu EmployeeMenu { get; set; }
@@ -107,14 +107,40 @@
         }
         static public void ShowInquiriesView(List<Inquiry> inquiries)
         {
-            Console.WriteLine("Ulæste beskeder: " + "{AMOUNT}");
-            Console.WriteLine("Læste beskeder: " + "{AMOUNT}");
+            Menu inquiryMenu = new Menu("");
+
+            foreach (Inquiry inquiry in inquiries)
+            {
+                inquiryMenu.AddItem(inquiry.Title);
+            }
+            
+            inquiryMenu.Show();
+            ShowInquiry(inquiries[inquiryMenu.GetSelection("")]);
+        }
+        static public void ShowInquiry(Inquiry inquiry)
+        {
+            throw new NotImplementedException();
         }
         static public void ShowSendInquiryView(Employee employee)
         {
+
+            Menu sendInquiry = new Menu("");
+
             Console.WriteLine("Title: ");
+
+            string title = Console.ReadLine();
+
+            sendInquiry.Title = title;
+
+
             Console.WriteLine("Emne: "); // LIST SUBJECTTYPE
+
+            SubjectType subjectType = new SubjectType();
+
             Console.WriteLine("Besked: ");
+
+            string message = Console.ReadLine();
+
             Console.WriteLine("Skal beskeden være anonym?: "); // BOOL
 
             Console.WriteLine("Hvilke HR-Præsentant skal modtage henvendelsen?"); // LIST EMPLOYEE
