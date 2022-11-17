@@ -10,7 +10,7 @@ namespace Riptos
 {
     public class InquiryRepository
     {
-        string fileName = "";
+        string fileName = "test.txt";
         List<Inquiry> inquiries = new List<Inquiry>();
         EncryptionHandler ec = new EncryptionHandler(); 
         
@@ -30,7 +30,7 @@ namespace Riptos
             }
         }
 
-        public void save(string message)
+        public void Save(string message)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace Riptos
                 Console.WriteLine(ex.Message);
             }
         }
-        public List<Inquiry> load()
+        public List<Inquiry> Load()
         {
             try
             {
@@ -61,7 +61,7 @@ namespace Riptos
 
                         line = sr.ReadLine();
                         string[] tempList = line.Split("");
-                        Inquiry inq = new Inquiry(ec.DecryptString(tempList[0]),Convert.ToBoolean(tempList[1]));
+                        Inquiry inq = new Inquiry(ec.DecryptString(tempList[0]), Convert.ToBoolean(tempList[1]));
                         strings.Add(inq);
 
                         // fix kryptering - lige nu krypteres hele beskeden, der er en overflødig anonymisering af beskeden. omskriv

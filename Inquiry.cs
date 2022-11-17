@@ -15,6 +15,14 @@ namespace Riptos
         public List<SubjectType> Subjects { get; set; }
         public List<Message> Conversation { get; set; }
         public bool IsAnonymous { get; set; }
+
+        /// <summary>
+        /// DONT USE THIS
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="isAnonymous"></param>
+        public Inquiry (string title, bool isAnonymous) : this (title, null, null, isAnonymous, null, null) { }
+
         public Inquiry(string title, List<SubjectType> subjects,Message message, bool isAnonymous,Employee sender,Employee receiver)
         {
             Title = title;
