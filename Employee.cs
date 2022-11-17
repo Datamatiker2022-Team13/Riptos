@@ -10,10 +10,12 @@
        public string Username
         {
             get { return username; }
+            set { username = value; }
         } 
         public string Password
         {
             get { return password; }
+            set { password = value; }
         }
         public string Name
         {
@@ -23,7 +25,7 @@
         {
             get { return isHR; }
         }
-        public Employee (string name, bool isHR, string UserVal, String PassVal)
+        public Employee (string name, bool isHR, string UserVal, string PassVal)
         {
             this.name = name;
             this.isHR = isHR;
