@@ -1,6 +1,6 @@
 ﻿namespace Riptos
 {
-    internal class Employee
+    public class Employee
     {
        public string username;
        private string password;
