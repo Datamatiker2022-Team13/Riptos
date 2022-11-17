@@ -107,11 +107,17 @@
         }
         static public void ShowInquiriesView(List<Inquiry> inquiries)
         {
-
+            Console.WriteLine("Ulæste beskeder: " + "{AMOUNT}");
+            Console.WriteLine("Læste beskeder: " + "{AMOUNT}");
         }
         static public void ShowSendInquiryView(Employee employee)
         {
+            Console.WriteLine("Title: ");
+            Console.WriteLine("Emne: "); // LIST SUBJECTTYPE
+            Console.WriteLine("Besked: ");
+            Console.WriteLine("Skal beskeden være anonym?: "); // BOOL
 
+            Console.WriteLine("Hvilke HR-Præsentant skal modtage henvendelsen?"); // LIST EMPLOYEE
         }
 
         public void CloseConsole()
