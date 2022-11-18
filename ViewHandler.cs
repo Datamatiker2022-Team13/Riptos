@@ -32,7 +32,6 @@
                     else
                         Console.WriteLine("Fejl!");
 
-
                     break;
 
                 case 1:
