@@ -4,12 +4,14 @@
     {
         public Employee ActiveEmployee { get; set; }
         static private EmployeeRepository employeeRepo;
+        static private ViewHandler viewHandler;
 
         static void Main (string[] args) {
             employeeRepo = new EmployeeRepository();
 
             InitializeViewHandler();
 
+            #region Cappers stuff
             Console.WriteLine("");
             EmployeeRepository ep = new EmployeeRepository();
 
@@ -26,43 +28,48 @@
 
             //string yeet = ep.load()[1].Password;
             //Console.WriteLine(yeet);
+            #endregion
+
+            viewHandler.ShowLoginView();
         }
         static public void InitializeViewHandler()
         {
-            Menu LoginMenu = new Menu("Velkommen til Login siden");
+            Menu loginMenu = new Menu("Velkommen til Login siden");
 
-            LoginMenu.AddItem("Login");
-            LoginMenu.AddItem("Register ny bruger");
+            loginMenu.AddItem("Login");
+            loginMenu.AddItem("Register ny bruger");
 
-            Menu HRMenu = new Menu("");
+            Menu hrMenu = new Menu("");
 
-            HRMenu.AddItem("Vis kalender");
-            HRMenu.AddItem("Send henvendelse");
-            HRMenu.AddItem("Vis henvendelse");
-            HRMenu.AddItem("Opret sag");
-            HRMenu.AddItem("Vis sager");
-            HRMenu.AddItem("Log ud");
+            hrMenu.AddItem("Vis kalender");
+            hrMenu.AddItem("Send henvendelse");
+            hrMenu.AddItem("Vis henvendelse");
+            hrMenu.AddItem("Opret sag");
+            hrMenu.AddItem("Vis sager");
+            hrMenu.AddItem("Log ud");
 
-            Menu EmployeeMenu = new Menu("");
+            Menu employeeMenu = new Menu("");
 
-            EmployeeMenu.AddItem("Vis kalender");
-            EmployeeMenu.AddItem("Send henvendelse");
-            EmployeeMenu.AddItem("Vis henvendelse");
-            EmployeeMenu.AddItem("Log ud");
+            employeeMenu.AddItem("Vis kalender");
+            employeeMenu.AddItem("Send henvendelse");
+            employeeMenu.AddItem("Vis henvendelse");
+            employeeMenu.AddItem("Log ud");
 
-            Menu SubjectMenu = new Menu("Vælg emne: ");
+            Menu subjectMenu = new Menu("Vælg emne: ");
 
-            SubjectMenu.AddItem("bullying");
-            SubjectMenu.AddItem("dicrimination");
-            SubjectMenu.AddItem("harassment");
+            subjectMenu.AddItem("bullying");
+            subjectMenu.AddItem("dicrimination");
+            subjectMenu.AddItem("harassment");
 
-            Menu HREmployeeMenu = new Menu("");
+            Menu hrEmployeeMenu = new Menu("");
 
             foreach (Employee employee in employeeRepo.GetAll())
             {
                 if (employee.IsHR == true)
-                    HREmployeeMenu.AddItem(employee.Username);
+                    hrEmployeeMenu.AddItem(employee.Username);
             }
+
+            viewHandler = new ViewHandler(loginMenu, employeeMenu, hrMenu, subjectMenu, hrEmployeeMenu);
         }
     } 
 }

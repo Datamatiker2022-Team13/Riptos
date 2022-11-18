@@ -27,6 +27,16 @@ namespace Riptos
             }
         }
 
+        public bool TryLogin (string username, string password) {
+            if (employeeRepository.GetEmployee(username).Password.Equals(password)) {
+                program.ActiveEmployee = employeeRepository.GetEmployee(username);
+                return true;
+            }
+
+            program.ActiveEmployee = null;
+            return false;
+        }
+
         public void SendInquiry(int receiverSelection, string title, List<SubjectType> subjects, string message, bool isAnonymous)
         {
             Message sendMessage = new Message (program.ActiveEmployee, message, DateTime.Now); //fidner ansatte ud fra brugernavn

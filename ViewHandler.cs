@@ -7,29 +7,37 @@
         public Menu LoginMenu { get; set; }
         public Menu EmployeeMainMenu { get; set; }
         public Menu HRMainMenu { get; set; }
-        public Menu SendInquiryMenu { get; set; }
         public Menu SubjectMenu { get; set; }
         public Menu HREmployeeMenu { get; set; }
-        public ViewHandler(Menu loginMenu, Menu employeeMainMenu, Menu hrMainMenu, Menu sendInquiryMenu, Menu subjectMenu, Menu hrEmployeeMenu)
+        public ViewHandler(Menu loginMenu, Menu employeeMainMenu, Menu hrMainMenu, Menu subjectMenu, Menu hrEmployeeMenu)
         {
             LoginMenu = loginMenu;
             EmployeeMainMenu = employeeMainMenu;
             HRMainMenu = hrMainMenu;
-            SendInquiryMenu = sendInquiryMenu;
             SubjectMenu = subjectMenu;
             HREmployeeMenu = hrEmployeeMenu;
         }
         public void ShowLoginView()
         {
-            LoginMenu.Show();
             switch (LoginMenu.GetSelection("Vælg handling: "))
             {
                 case 0:
                     Console.WriteLine("Login side");
+
+                    string username = InputHandler.GetUserInputString("Indtast brugernavn: ");
+                    string password = InputHandler.GetUserInputString("Indtast kodeord: ");
+
+                    if (controller.TryLogin(username, password))
+                        Console.WriteLine("Succes!");
+                    else
+                        Console.WriteLine("Fejl!");
+
+
                     break;
 
                 case 1:
                     Console.WriteLine("Register ny bruger");
+                    Console.Read();
                     break;
             }
         }

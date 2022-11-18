@@ -15,6 +15,7 @@ namespace Riptos
         {
             while (true)
             {
+                Console.WriteLine(prompt);
                 string userInput = Console.ReadLine();
                 if (!string.IsNullOrWhiteSpace(userInput))
                 {
