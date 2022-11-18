@@ -3,8 +3,13 @@
     internal class Program
     {
         public Employee ActiveEmployee { get; set; }
-        private EmployeeRepository employeeRepo;
+        static private EmployeeRepository employeeRepo;
+
         static void Main (string[] args) {
+            employeeRepo = new EmployeeRepository();
+
+            InitializeViewHandler();
+
             Console.WriteLine("");
             EmployeeRepository ep = new EmployeeRepository();
 
@@ -22,7 +27,7 @@
             //string yeet = ep.load()[1].Password;
             //Console.WriteLine(yeet);
         }
-        public void InitializeViewHandler()
+        static public void InitializeViewHandler()
         {
             Menu LoginMenu = new Menu("Velkommen til Login siden");
 

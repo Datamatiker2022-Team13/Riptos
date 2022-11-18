@@ -38,7 +38,7 @@
             bool running = true;
             while (running)
             {
-                Console.WriteLine("Velkommen til " + employee.username );
+                Console.WriteLine("Velkommen til " + employee.Username);
                 if (employee.IsHR == true)
                 {
                     HRMainMenu.Show();
@@ -111,9 +111,13 @@
 
             string title = InputHandler.GetUserInputString("Titel: ");
 
+            // TODOOOOO
             SubjectMenu.Show();
             int selection = SubjectMenu.GetSelection("Emne: ");
             SubjectType subject = (SubjectType)selection;
+
+            List<SubjectType> subjects = new List<SubjectType>();
+            subjects.Add(subject);
 
             string message = InputHandler.GetUserInputString("Besked: ");
 
@@ -122,7 +126,7 @@
             HREmployeeMenu.Show();
             int receiverSelection = HREmployeeMenu.GetSelection("Hvilke HR-Præsentant skal modtage henvendelsen?");
 
-            controller.SendInquiry(receiverSelection, title, subject, message, isAnonymous);
+            controller.SendInquiry(receiverSelection, title, subjects, message, isAnonymous);
         }
 
         public void CloseConsole()

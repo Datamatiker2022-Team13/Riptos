@@ -11,7 +11,7 @@ namespace Riptos
     {
         public string Title { get; set; }
         private List<string> menuItems;
-        public Menu(string title, int size)
+        public Menu(string title)
         {
             Title = title;
             menuItems = new List<string>();
@@ -45,7 +45,7 @@ namespace Riptos
                         return selection - 1;
                     }
                 }
-                Console.WriteLine("Error - wrong input" + message + "Invalid Input");
+                Console.WriteLine("Error - wrong input" + input + "Invalid Input");
                 Console.WriteLine("Press any key to try again");
                 Console.ReadKey();
                 Console.Clear();
