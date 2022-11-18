@@ -5,34 +5,19 @@
         private Controller controller;
         static int sleeper = 1000;
         public Menu LoginMenu { get; set; }
-        public Menu EmployeeMenu { get; set; }
-        public Menu HRMenu { get; set; }
-
-        public ViewHandler()
+        public Menu EmployeeMainMenu { get; set; }
+        public Menu HRMainMenu { get; set; }
+        public Menu SendInquiryMenu { get; set; }
+        public Menu SubjectMenu { get; set; }
+        public Menu HREmployeeMenu { get; set; }
+        public ViewHandler(Menu loginMenu, Menu employeeMainMenu, Menu hrMainMenu, Menu sendInquiryMenu, Menu subjectMenu, Menu hrEmployeeMenu)
         {
-            
-
-            LoginMenu = new Menu("Velkommen til Login siden");
-
-            LoginMenu.AddItem("Login");
-            LoginMenu.AddItem("Register ny bruger");
-
-            HRMenu = new Menu("");
-
-            HRMenu.AddItem("Vis kalender");
-            HRMenu.AddItem("Send henvendelse");
-            HRMenu.AddItem("Vis henvendelse");
-            HRMenu.AddItem("Opret sag");
-            HRMenu.AddItem("Vis sager");
-            HRMenu.AddItem("Log ud");
-
-            EmployeeMenu = new Menu("");
-
-
-            EmployeeMenu.AddItem("Vis kalender");
-            EmployeeMenu.AddItem("Send henvendelse");
-            EmployeeMenu.AddItem("Vis henvendelse");
-            EmployeeMenu.AddItem("Log ud");
+            LoginMenu = loginMenu;
+            EmployeeMainMenu = employeeMainMenu;
+            HRMainMenu = hrMainMenu;
+            SendInquiryMenu = sendInquiryMenu;
+            SubjectMenu = subjectMenu;
+            HREmployeeMenu = hrEmployeeMenu;
         }
         public void ShowLoginView()
         {
@@ -56,8 +41,8 @@
                 Console.WriteLine("Velkommen til " + employee.username );
                 if (employee.IsHR == true)
                 {
-                    HRMenu.Show();
-                    switch (HRMenu.GetSelection("Vælg Handling: "))
+                    HRMainMenu.Show();
+                    switch (HRMainMenu.GetSelection("Vælg Handling: "))
                     {
                         case 0:
                             Console.WriteLine("Vis kalender side");
@@ -83,8 +68,8 @@
                 }
                 else
                 {
-                    EmployeeMenu.Show();
-                    switch (EmployeeMenu.GetSelection("Vælg handling: "))
+                    EmployeeMainMenu.Show();
+                    switch (EmployeeMainMenu.GetSelection("Vælg handling: "))
                     {
                         case 0:
                             Console.WriteLine("Vis kalender side");
@@ -105,7 +90,7 @@
 
 
         }
-        static public void ShowInquiriesView(List<Inquiry> inquiries)
+        public void ShowInquiriesView(List<Inquiry> inquiries)
         {
             Menu inquiryMenu = new Menu("");
 
@@ -117,33 +102,27 @@
             inquiryMenu.Show();
             ShowInquiry(inquiries[inquiryMenu.GetSelection("")]);
         }
-        static public void ShowInquiry(Inquiry inquiry)
+        public void ShowInquiry(Inquiry inquiry)
         {
             throw new NotImplementedException();
         }
-        static public void ShowSendInquiryView(Employee employee)
+        public void ShowSendInquiryView(Employee employee)
         {
 
-            Menu sendInquiry = new Menu("");
+            string title = InputHandler.GetUserInputString("Titel: ");
 
-            Console.WriteLine("Title: ");
+            SubjectMenu.Show();
+            int selection = SubjectMenu.GetSelection("Emne: ");
+            SubjectType subject = (SubjectType)selection;
 
-            string title = Console.ReadLine();
+            string message = InputHandler.GetUserInputString("Besked: ");
 
-            sendInquiry.Title = title;
+            bool isAnonymous = InputHandler.GetUserInputBool("Skal beskeden være anonym?: ");
 
+            HREmployeeMenu.Show();
+            int receiverSelection = HREmployeeMenu.GetSelection("Hvilke HR-Præsentant skal modtage henvendelsen?");
 
-            Console.WriteLine("Emne: "); // LIST SUBJECTTYPE
-
-            SubjectType subjectType = new SubjectType();
-
-            Console.WriteLine("Besked: ");
-
-            string message = Console.ReadLine();
-
-            Console.WriteLine("Skal beskeden være anonym?: "); // BOOL
-
-            Console.WriteLine("Hvilke HR-Præsentant skal modtage henvendelsen?"); // LIST EMPLOYEE
+            controller.SendInquiry(receiverSelection, title, subject, message, isAnonymous);
         }
 
         public void CloseConsole()

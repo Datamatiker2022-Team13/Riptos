@@ -12,10 +12,10 @@ namespace Riptos
         private EmployeeRepository employeeRepository;
         private InquiryRepository inquiryRepository;
 
-        public void SendInquiry(string senderUsername, string receiverUsername, string title, List<SubjectType> subjects, string message, bool isAnonymous)
+        public void SendInquiry(int receiverSelection, string title, List<SubjectType> subjects, string message, bool isAnonymous)
         {
-            Message sendMessage = new Message(employeeRepository.GetEmployee(senderUsername), message, DateTime.Now);//fidner ansatte ud fra brugernavn
-            Inquiry inquiry = new Inquiry(title, subjects, sendMessage, isAnonymous,employeeRepository.GetEmployee(senderUsername),employeeRepository.GetEmployee(receiverUsername));
+            Message sendMessage = new Message (program.ActiveEmployee, message, DateTime.Now);//fidner ansatte ud fra brugernavn
+            Inquiry inquiry = new Inquiry(title, subjects, sendMessage, isAnonymous,program.ActiveEmployee,employeeRepository.GetEmployee(receiverUsername));
             inquiryRepository.AddInquiry(inquiry);  
         }
     }

@@ -133,7 +133,10 @@ namespace Riptos
         }
 
 
-        
+        public List<Employee> GetAll()
+        {
+            throw new NotImplementedException();
+        }
 
 
 
