@@ -5,5 +5,7 @@
         bullying,
         dicrimination,
         harassment
+
+        // TODO : add more subjectType enums here
     }
 }

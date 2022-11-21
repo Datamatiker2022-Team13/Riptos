@@ -18,6 +18,7 @@ namespace Whistleblower.Models
 
         /// <summary>
         /// DONT USE THIS
+        /// TODO : this is a temporary constructor, and should be removed later
         /// </summary>
         /// <param name="title"></param>
         /// <param name="isAnonymous"></param>

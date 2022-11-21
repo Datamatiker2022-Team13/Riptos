@@ -15,7 +15,6 @@ namespace Whistleblower.Models
         List<Inquiry> inquiries = new List<Inquiry>();
         EncryptionHandler ec = new EncryptionHandler(); 
         
-
         public void StorageStart(string filename)
         {
             try
@@ -65,16 +64,15 @@ namespace Whistleblower.Models
                         Inquiry inq = new Inquiry(ec.DecryptString(tempList[0]), Convert.ToBoolean(tempList[1]));
                         strings.Add(inq);
 
-                        // fix kryptering - lige nu krypteres hele beskeden, der er en overflødig anonymisering af beskeden. omskriv
-
+                        // TODO : fix kryptering - lige nu krypteres hele beskeden, der er en overflødig anonymisering af beskeden. omskriv
                     }
+
                     return strings;
                 }
             }
             catch (Exception ex)
             {
                 return null;
-
             }
         }
 

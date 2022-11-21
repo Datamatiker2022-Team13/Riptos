@@ -2,35 +2,35 @@
 {
     public class Employee
     {
-       private string username;
-       private string password;
-       private string name;
-       private bool isHR;
+       private string _username;
+       private string _password;
+       private string _name;
+       private bool _isHR;
 
        public string Username
         {
-            get { return username; }
-            set { username = value; }
+            get { return _username; }
+            set { _username = value; }
         } 
         public string Password
         {
-            get { return password; }
-            set { password = value; }
+            get { return _password; }
+            set { _password = value; }
         }
         public string Name
         {
-            get { return name; }
+            get { return _name; }
         }
         public bool IsHR
         {
-            get { return isHR; }
+            get { return _isHR; }
         }
-        public Employee (string name, bool isHR, string UserVal, string PassVal)
+        public Employee (string name, bool isHR, string username, string password)
         {
-            this.name = name;
-            this.isHR = isHR;
-            this.username = UserVal;
-            this.password = PassVal;
+            _name = name;
+            _isHR = isHR;
+            _username = username;
+            _password = password;
         }
         //public void SetUserCredentials(string UserVal, string PassVal)
         //{

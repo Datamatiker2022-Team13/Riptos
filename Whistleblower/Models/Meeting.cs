@@ -8,6 +8,7 @@ namespace Whistleblower.Models
         public DateTime PlannedTime { get; set; }
         public bool InPerson { get; set; }
 
+        // TODO : Add a constructor here, when necessary
     }
 
 }

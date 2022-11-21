@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Whistleblower.Models
 {
+    // TODO : refactor this code later to remove the use of Console method calls
     public class InputHandler
     {
         public static string GetUserInputString(string prompt) // bliver userinput sendt fra en anden klasse eller beder denne klasse om userinput?
