@@ -40,7 +40,11 @@ namespace Riptos
                 StorageStart(fileName);
                 using (StreamWriter sw = new StreamWriter(fileName, true))
                 {
-                    sw.WriteLine(employees[0].Name + "," + employees[0].IsHR + "," + ec.EncryptString(employees[0].Username) + "," + ec.EncryptString(employees[0].Password));
+                    for (int i = 0; i < employees.Count; i++)
+                    {
+                        sw.WriteLine(employees[i].Name + "," + employees[i].IsHR + "," + ec.EncryptString(employees[i].Username) + "," + ec.EncryptString(employees[i].Password));
+
+                    }
                 }
             }
             catch (Exception ex)
@@ -59,12 +63,15 @@ namespace Riptos
                     List<Employee> strings = new List<Employee>();
                     while (!sr.EndOfStream)
                     {
-                        
-                        line = sr.ReadLine();
-                        string[] tempList = line.Split(",");
-                        Employee emp = new Employee(tempList[0], Convert.ToBoolean(tempList[1]), ec.DecryptString(tempList[2]), ec.DecryptString(tempList[3]));
-                        strings.Add(emp);
-                        //strings.Add(line = sr.ReadLine());
+                        for (int i = 0; i < employees.Count; i++)
+                        {
+                            line = sr.ReadLine();
+                            string[] tempList = line.Split(",");
+                            Employee emp = new Employee(tempList[i], Convert.ToBoolean(tempList[i+1]), ec.DecryptString(tempList[i+2]), ec.DecryptString(tempList[i+3]));
+                            strings.Add(emp);
+                            //strings.Add(line = sr.ReadLine());
+
+                        }
                         
                     }
                     return strings;
