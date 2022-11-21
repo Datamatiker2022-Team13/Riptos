@@ -1,4 +1,6 @@
-﻿namespace Whistleblower.Models
+﻿using System;
+
+namespace Whistleblower.Models
 {
     public class Meeting
     {

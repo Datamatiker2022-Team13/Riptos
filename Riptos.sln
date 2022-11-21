@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Riptos", "Riptos.csproj", "{2F74FDD7-1CDB-4D99-8CB5-0847C3F18D3A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Whistleblower", "Whistleblower\Whistleblower.csproj", "{7B0C3BDE-BFD3-4034-9DFA-B58D7E42340E}"
 EndProject
 Global
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2F74FDD7-1CDB-4D99-8CB5-0847C3F18D3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2F74FDD7-1CDB-4D99-8CB5-0847C3F18D3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2F74FDD7-1CDB-4D99-8CB5-0847C3F18D3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2F74FDD7-1CDB-4D99-8CB5-0847C3F18D3A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7B0C3BDE-BFD3-4034-9DFA-B58D7E42340E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7B0C3BDE-BFD3-4034-9DFA-B58D7E42340E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B0C3BDE-BFD3-4034-9DFA-B58D7E42340E}.Release|Any CPU.ActiveCfg = Release|Any CPU
