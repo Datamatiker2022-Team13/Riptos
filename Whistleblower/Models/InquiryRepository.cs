@@ -6,7 +6,7 @@ using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Riptos
+namespace Whistleblower.Models
 {
     public class InquiryRepository
     {

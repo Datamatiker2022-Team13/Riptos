@@ -1,4 +1,4 @@
-﻿namespace Riptos
+﻿namespace Whistleblower.Models
 {
     public class ViewHandler
     {
