@@ -12,28 +12,19 @@ namespace Whistleblower.Models
         public Employee Receiver { get; private set; }
 
         public string Title { get; set; }
-        public SubjectType Subjects { get; set; }
+        public SubjectType Subject { get; set; }
         public Message Conversation { get; set; }
         public bool IsAnonymous { get; set; }
 
-        /// <summary>
-        /// DONT USE THIS
-        /// TODO : this is a temporary constructor, and should be removed later
-        /// </summary>
-        /// <param name="title"></param>
-        /// <param name="isAnonymous"></param>
-        //public Inquiry (string title, bool isAnonymous) : this (title, null, null, isAnonymous, null, null) { }
-
-        public Inquiry(string title, SubjectType subjects,Message message, bool isAnonymous,Employee sender,Employee receiver)
+        public Inquiry(string title, SubjectType subject, Message message, bool isAnonymous,Employee sender,Employee receiver)
         {
-            Title = title;
-            Subjects = subjects;
-            Conversation = message;
-            IsAnonymous = isAnonymous;
             Sender = sender;
             Receiver = receiver;
-        }
-             
-    }
 
+            Title = title;
+            Subject = subject;
+            Conversation = message;
+            IsAnonymous = isAnonymous;
+        }
+    }
 }
