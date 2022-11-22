@@ -37,10 +37,20 @@ namespace Whistleblower.Models
                 StorageStart(fileName);
                 using (StreamWriter sw = new StreamWriter(fileName, true))
 
-                { 
-                    sw.WriteLine(ec.EncryptString(message));
+                {
+                    for (int i = 0; i < inquiries.Count; i++)
+                    {
+                        if (inquiries[i].IsAnonymous == true)
+                        {
+                            sw.WriteLine(inquiries[i].Title + "^" + inquiries[i].Subjects + "^" + ec.EncryptString(Convert.ToString(inquiries[i].Conversation)) + "^" + inquiries[i].IsAnonymous + "^" + ec.EncryptString(Convert.ToString(inquiries[i].Sender)) + "^" + inquiries[i].Receiver);
+                        }
+                        else
+                        {
+                            sw.WriteLine(inquiries[i].Title + "^" + inquiries[i].Subjects + "^" + inquiries[i].Conversation + "^" + inquiries[i].IsAnonymous + "^" + inquiries[i].Sender + "^" + inquiries[i].Receiver);
+                        }
+                    }
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -58,21 +68,33 @@ namespace Whistleblower.Models
                     List<Inquiry> strings = new List<Inquiry>();
                     while (!sr.EndOfStream)
                     {
+                        int i = 0;
+                        if (inquiries[i].IsAnonymous == true)//TODO Fix this if statement, u cant use the list here, cause the list will be reset every time the program starts.
+                        {
+                            line = sr.ReadLine();
+                            string[] tempList1 = line.Split("^");
+                            Inquiry inq = new Inquiry(tempList1[i], (SubjectType)Enum.Parse(typeof(SubjectType), tempList1[i + 1]), new Message(null, ec.DecryptString(tempList1[i + 2]), DateTime.Now), Convert.ToBoolean(tempList1[i + 3]), new Employee(ec.DecryptString(tempList1[i + 4]), false, null, null), new Employee(ec.DecryptString(tempList1[i + 5]), false, null, null));
+                            strings.Add(inq);
 
-                        line = sr.ReadLine();
-                        string[] tempList = line.Split("");
-                        Inquiry inq = new Inquiry(ec.DecryptString(tempList[0]), Convert.ToBoolean(tempList[1]));
-                        strings.Add(inq);
+                        }
+                        else
+                        {
+                            line = sr.ReadLine();
+                            string[] tempList1 = line.Split("^");
+                            Inquiry inq = new Inquiry(tempList1[i], (SubjectType)Enum.Parse(typeof(SubjectType), tempList1[i + 1]), new Message(null, tempList1[i + 2], DateTime.Now), Convert.ToBoolean(tempList1[i + 3]), new Employee(tempList1[i + 4], false, null, null), new Employee(tempList1[i + 5], false, null, null));
+                            strings.Add(inq);
+                        }
 
-                        // TODO : fix kryptering - lige nu krypteres hele beskeden, der er en overflødig anonymisering af beskeden. omskriv
+                        i += 1;
                     }
-
                     return strings;
+
                 }
             }
             catch (Exception ex)
             {
                 return null;
+
             }
         }
 
