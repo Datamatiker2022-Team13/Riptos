@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Whistleblower.Models;
 
 namespace Whistleblower
 {
@@ -20,8 +21,17 @@ namespace Whistleblower
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow () {
             InitializeComponent();
+        }
+
+        private void btn_Validate_Click(object sender, RoutedEventArgs e)
+        {
+            if (txt_Input.Text == null)
+            {
+                lbl_message.Content = "Error, no input found";
+            }
         }
     }
 }
