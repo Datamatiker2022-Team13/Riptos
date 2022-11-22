@@ -24,14 +24,27 @@ namespace Whistleblower
 
         public MainWindow () {
             InitializeComponent();
+
         }
 
-        private void btn_Validate_Click(object sender, RoutedEventArgs e)
+        private void txt_Input_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (txt_Input.Text == null)
+            if (InputValidator.ValidateInputIsString(txt_Input.Text))
             {
-                lbl_message.Content = "Error, no input found";
+                if (InputValidator.ValidateInputIsInt(txt_Input.Text))
+                {
+                    lbl_message.Content = "Error.. Can't accept numbers";
+                }
+                else
+                {
+                    lbl_message.Content = "No errors found... have a nice day! :D";
+                }
             }
+            else
+            {
+                lbl_message.Content = "Error... Missing input..";
+            }
+
         }
     }
 }
