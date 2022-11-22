@@ -26,7 +26,8 @@ namespace Whistleblower.Views
         public Hub () {
             InitializeComponent();
 
-            DataContext = new HubViewModel();
+            HubVM = new HubViewModel();
+            DataContext = HubVM;
         }
 
         private void TestTextBox_TextChanged (object sender, TextChangedEventArgs e) {
