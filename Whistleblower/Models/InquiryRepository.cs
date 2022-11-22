@@ -42,11 +42,11 @@ namespace Whistleblower.Models
                     {
                         if (inquiries[i].IsAnonymous == true)
                         {
-                            sw.WriteLine(inquiries[i].Title + "^" + inquiries[i].Subjects + "^" + ec.EncryptString(Convert.ToString(inquiries[i].Conversation)) + "^" + inquiries[i].IsAnonymous + "^" + ec.EncryptString(Convert.ToString(inquiries[i].Sender)) + "^" + inquiries[i].Receiver);
+                            sw.WriteLine(inquiries[i].Title + "^" + inquiries[i].Subject + "^" + ec.EncryptString(Convert.ToString(inquiries[i].Conversation)) + "^" + inquiries[i].IsAnonymous + "^" + ec.EncryptString(Convert.ToString(inquiries[i].Sender)) + "^" + inquiries[i].Receiver);
                         }
                         else
                         {
-                            sw.WriteLine(inquiries[i].Title + "^" + inquiries[i].Subjects + "^" + inquiries[i].Conversation + "^" + inquiries[i].IsAnonymous + "^" + inquiries[i].Sender + "^" + inquiries[i].Receiver);
+                            sw.WriteLine(inquiries[i].Title + "^" + inquiries[i].Subject + "^" + inquiries[i].Conversation + "^" + inquiries[i].IsAnonymous + "^" + inquiries[i].Sender + "^" + inquiries[i].Receiver);
                         }
                     }
                 }
