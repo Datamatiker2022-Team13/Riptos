@@ -1,116 +1,77 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.ExceptionServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Whistleblower.Models
 {
     public class InquiryRepository
     {
-        string fileName = "InquiryRepository.txt";
-        List<Inquiry> inquiries = new List<Inquiry>();
-        EncryptionHandler ec = new EncryptionHandler(); 
-        
-        public InquiryRepository () {
-            inquiries = Load();
-        }
+        private EmployeeRepository employeeRepo;
+        private MessageRepository messageRepo;
 
-        public void StorageStart(string filename)
-        {
-            try
-            {
-                if (!File.Exists(fileName))
-                {
-                    using (FileStream fs = File.Create(filename)) ;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+        private string filePath = Path.GetFullPath(@"..\..\..\Data\InquiryRepository.txt");
+
+        private EncryptionHandler encryptor;
+
+        private List<Inquiry> inquiries;
+        
+        public InquiryRepository (EmployeeRepository employeeRepo, MessageRepository messageRepo) {
+            this.employeeRepo = employeeRepo;
+            this.messageRepo = messageRepo;
+
+            encryptor = new EncryptionHandler();
+
+            inquiries = new List<Inquiry>();
+            Load();
         }
 
         public void Save(string message)
         {
-            try
-            {
-                StorageStart(fileName);
-                using (StreamWriter sw = new StreamWriter(fileName, true))
+            if (!File.Exists(filePath))
+                File.Create(filePath).Close();
 
-                {
-                    for (int i = 0; i < inquiries.Count; i++)
-                    {
-                        if (inquiries[i].IsAnonymous == true)
-                        {
-                            sw.WriteLine(inquiries[i].Title + "^" + inquiries[i].Subject + "^" + ec.EncryptString(Convert.ToString(inquiries[i].Conversation)) + "^" + inquiries[i].IsAnonymous + "^" + ec.EncryptString(Convert.ToString(inquiries[i].Sender)) + "^" + inquiries[i].Receiver);
-                        }
-                        else
-                        {
-                            sw.WriteLine(inquiries[i].Title + "^" + inquiries[i].Subject + "^" + inquiries[i].Conversation + "^" + inquiries[i].IsAnonymous + "^" + inquiries[i].Sender + "^" + inquiries[i].Receiver);
-                        }
-                    }
+            using (StreamWriter sw = new StreamWriter(filePath, false)) {
+                foreach (Inquiry inquiry in inquiries) {
+                    string encryptedInquiry = encryptor.EncryptString(inquiry.GetCSVFormat());
+                    sw.WriteLine(encryptedInquiry);
                 }
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
             }
         }
-        public List<Inquiry> Load()
+        public void Load ()
         {
-            try
-            {
-                StorageStart(fileName);
-                using (StreamReader sr = new StreamReader(fileName))
-                {
-                    string line;
-                    List<Inquiry> strings = new List<Inquiry>();
-                    while (!sr.EndOfStream)
-                    {
-                        line = sr.ReadLine();
-                        string[] tempList1 = line.Split("^");
-                        Inquiry inq = new Inquiry(tempList1[0], (SubjectType)Enum.Parse(typeof(SubjectType), tempList1[1]), new Message(null, tempList1[2], DateTime.Now), Convert.ToBoolean(tempList1[3]), new Employee(tempList1[4], false, null, null), new Employee(tempList1[5], false, null, null));
-                        strings.Add(inq);
-                    }
-                    return strings;
+            using (StreamReader sr = new StreamReader(filePath)) {
+                while (!sr.EndOfStream) {
+                    //string decryptedString = encryptor.DecryptString(sr.ReadLine());
+                    string decryptedString = sr.ReadLine();
+                    string[] splitLine = decryptedString.Split(';');
 
-                }
-            }
-            catch (Exception ex)
-            {
-                return null;
+                    Employee sender = employeeRepo.GetEmployee(int.Parse(splitLine[0]));
+                    Employee receiver = employeeRepo.GetEmployee(int.Parse(splitLine[1]));
+                    string title = splitLine[2];
+                    SubjectType subject = (SubjectType)Enum.Parse(typeof(SubjectType), splitLine[3]);
+                    Message conversation = messageRepo.Retrieve(int.Parse(splitLine[4]));
+                    bool isAnonymous = bool.Parse(splitLine[5]);
 
-            }
-        }
+                    Inquiry inquiry = new Inquiry(sender, receiver, title, subject, conversation, isAnonymous);
 
-        public void AddInquiry(Inquiry inquiry)
-        {
-            for (int i = 0; i < inquiries.Count; i++)
-            {
-                if (inquiry.Title == inquiries[i].Title)
-                {
-                    Console.WriteLine("Denne henvendelse er i forvejen oprettet");
-                }
-                else
-                {
                     inquiries.Add(inquiry);
                 }
-
             }
         }
 
-
-        public Inquiry GetInquiry(string title)
+        public Inquiry AddInquiry(Employee sender, Employee receiver, string title, SubjectType subject, Message message, bool isAnonymous)
         {
-            for (int i = 0; i < inquiries.Count; i++)
-            {
-                if (inquiries[i].Title == title)
-                {
+            Inquiry inquiry = new Inquiry(sender, receiver, title, subject, message, isAnonymous);
+
+            inquiries.Add(inquiry);
+
+            return inquiry;
+        }
+
+
+        public Inquiry GetInquiry(int id) {
+            for (int i = 0; i < inquiries.Count; i++) {
+                if (inquiries[i].ID == id) {
                     return inquiries[i];
                 }
             }

@@ -1,20 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Whistleblower.Models
 {
     public class Message
     {
+        private static int iDCount = 0;
+
+        public int ID { get; private set; }
+
         public Employee Sender { get; private set; }
         public string Content { get; private set; }
         public DateTime SendDate { get; private set; }
 
-        public Message(Employee employee, string content, DateTime sendDate)
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        /// <param name="sender">The sender of the message.</param>
+        /// <param name="content">The content of the message.</param>
+        /// <param name="sendDate">The <see cref="DateTime"/> the message is sent.</param>
+        public Message(Employee sender, string content, DateTime sendDate)
         {
-            Sender = employee;
+            ID = iDCount++;
+
+            Sender = sender;
             Content = content;
             SendDate = sendDate;
         }

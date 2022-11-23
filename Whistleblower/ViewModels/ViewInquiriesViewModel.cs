@@ -11,7 +11,9 @@ namespace Whistleblower.ViewModels
 {
     public class ViewInquiriesViewModel : INotifyPropertyChanged
     {
-        private InquiryRepository inquiryRepo = new InquiryRepository ();
+        private EmployeeRepository employeeRepo;
+        private MessageRepository messageRepo;
+        private InquiryRepository inquiryRepo;
 
         public ObservableCollection<InquiryViewModel> InquiryVMs { get; set; }
 
@@ -25,6 +27,10 @@ namespace Whistleblower.ViewModels
         }
 
         public ViewInquiriesViewModel () {
+            employeeRepo= new EmployeeRepository();
+            messageRepo = new MessageRepository(employeeRepo);
+            inquiryRepo = new InquiryRepository(employeeRepo, messageRepo);
+
             InquiryVMs = new ObservableCollection<InquiryViewModel>();
 
             foreach (Inquiry inquiry in inquiryRepo.GetAllInquiries()) {

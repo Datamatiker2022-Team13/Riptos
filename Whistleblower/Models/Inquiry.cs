@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Security.Cryptography.Pkcs;
 
 namespace Whistleblower.Models
 {
     public class Inquiry
     {
+        private static int iDCount = 0;
+
+        public int ID { get; private set; }
+
         public Employee Sender { get; private set; }
         public Employee Receiver { get; private set; }
 
@@ -16,8 +16,10 @@ namespace Whistleblower.Models
         public Message Conversation { get; set; }
         public bool IsAnonymous { get; set; }
 
-        public Inquiry(string title, SubjectType subject, Message message, bool isAnonymous,Employee sender,Employee receiver)
+        public Inquiry(Employee sender, Employee receiver, string title, SubjectType subject, Message message, bool isAnonymous)
         {
+            ID = iDCount++;
+
             Sender = sender;
             Receiver = receiver;
 
@@ -25,6 +27,10 @@ namespace Whistleblower.Models
             Subject = subject;
             Conversation = message;
             IsAnonymous = isAnonymous;
+        }
+
+        public string GetCSVFormat () {
+            return string.Format($"{Sender.ID};{Receiver.ID};{Title};{Subject};{Conversation.ID};{IsAnonymous}");
         }
     }
 }
