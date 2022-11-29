@@ -4,6 +4,9 @@ namespace Whistleblower.Models
 {
     public class Inquiry
     {
+        /// <summary>
+        /// Internal ID counter.
+        /// </summary>
         private static int iDCount = 0;
 
         public int ID { get; private set; }

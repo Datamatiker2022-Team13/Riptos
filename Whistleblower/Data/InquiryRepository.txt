@@ -1,6 +1,6 @@
 ﻿0;1;Jeg er sku ligeglad;bullying;0;true
-0;1;Jeg er sku ligeglad;bullying;0;true
-0;1;Jeg er sku ligeglad;bullying;0;true
-0;1;Jeg er sku ligeglad;bullying;0;true
+0;1;Jeg er sku mega påvirket manner;bullying;0;true
+0;1;Mine bukser er begyndt at klø efter Jannick er blevet min sidemakker;harassment;0;true
+0;1;Katten karlos spinner hele tiden, men han gør det kun når jeg er i rummet med ham!;discrimination;0;false
 0;1;Jeg er sku ligeglad;bullying;0;true
 0;1;Jeg er sku ligeglad;bullying;0;true

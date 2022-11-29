@@ -27,7 +27,7 @@ namespace Whistleblower.ViewModels
         }
 
         public void DeleteInquiry (InquiryRepository inquiryRepo) {
-            inquiryRepo.RemoveInquiry(source);
+            inquiryRepo.Delete(source);
         }
     }
 }

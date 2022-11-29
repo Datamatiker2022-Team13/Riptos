@@ -6,51 +6,72 @@ namespace Whistleblower.Models
 {
     public class InquiryRepository
     {
-        private EmployeeRepository employeeRepo;
-        private MessageRepository messageRepo;
+        #region Singleton
+        private static InquiryRepository? _instance;
+        /// <summary>
+        /// NOT THREAD SAFE
+        /// </summary>
+        public static InquiryRepository Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new InquiryRepository();
+                    return _instance;
+                }
+                return _instance;
+            }
 
-        private string filePath = Path.GetFullPath(@"..\..\..\Data\InquiryRepository.txt");
+            private set
+            {
+                _instance = value;
+            }
+        }
 
-        private EncryptionHandler encryptor;
-
-        private List<Inquiry> inquiries;
-        
-        public InquiryRepository (EmployeeRepository employeeRepo, MessageRepository messageRepo) {
-            this.employeeRepo = employeeRepo;
-            this.messageRepo = messageRepo;
-
-            encryptor = new EncryptionHandler();
-
+        private InquiryRepository()
+        {
             inquiries = new List<Inquiry>();
             Load();
         }
+        #endregion
 
-        public void Save(string message)
+        private string filePath = Path.GetFullPath(@"..\..\..\Data\InquiryRepository.txt");
+
+        private List<Inquiry> inquiries;
+
+        #region Persistance
+        public void Save()
         {
             if (!File.Exists(filePath))
                 File.Create(filePath).Close();
 
-            using (StreamWriter sw = new StreamWriter(filePath, false)) {
-                foreach (Inquiry inquiry in inquiries) {
-                    string encryptedInquiry = encryptor.EncryptString(inquiry.GetCSVFormat());
-                    sw.WriteLine(encryptedInquiry);
+            using (StreamWriter sw = new StreamWriter(filePath, false))
+            {
+                foreach (Inquiry inquiry in inquiries)
+                {
+                    string encryptedString = EncryptionHandler.EncryptString(inquiry.GetCSVFormat());
+                    sw.WriteLine(encryptedString);
                 }
             }
         }
-        public void Load ()
+
+        public void Load()
         {
-            using (StreamReader sr = new StreamReader(filePath)) {
-                while (!sr.EndOfStream) {
+            using (StreamReader sr = new StreamReader(filePath))
+            {
+                while (!sr.EndOfStream)
+                {
                     //string decryptedString = encryptor.DecryptString(sr.ReadLine());
                     string decryptedString = sr.ReadLine();
-                    string[] splitLine = decryptedString.Split(';');
+                    string[] parts = decryptedString.Split(';');
 
-                    Employee sender = employeeRepo.GetEmployee(int.Parse(splitLine[0]));
-                    Employee receiver = employeeRepo.GetEmployee(int.Parse(splitLine[1]));
-                    string title = splitLine[2];
-                    SubjectType subject = (SubjectType)Enum.Parse(typeof(SubjectType), splitLine[3]);
-                    Message conversation = messageRepo.Retrieve(int.Parse(splitLine[4]));
-                    bool isAnonymous = bool.Parse(splitLine[5]);
+                    Employee sender = EmployeeRepository.Instance.Retrieve(int.Parse(parts[0]));
+                    Employee receiver = EmployeeRepository.Instance.Retrieve(int.Parse(parts[1]));
+                    string title = parts[2];
+                    SubjectType subject = (SubjectType) Enum.Parse(typeof(SubjectType), parts[3]);
+                    Message conversation = MessageRepository.Instance.Retrieve(int.Parse(parts[4]));
+                    bool isAnonymous = bool.Parse(parts[5]);
 
                     Inquiry inquiry = new Inquiry(sender, receiver, title, subject, conversation, isAnonymous);
 
@@ -58,8 +79,10 @@ namespace Whistleblower.Models
                 }
             }
         }
+        #endregion
 
-        public Inquiry AddInquiry(Employee sender, Employee receiver, string title, SubjectType subject, Message message, bool isAnonymous)
+        #region CRUD
+        public Inquiry Create(Employee sender, Employee receiver, string title, SubjectType subject, Message message, bool isAnonymous)
         {
             Inquiry inquiry = new Inquiry(sender, receiver, title, subject, message, isAnonymous);
 
@@ -68,10 +91,12 @@ namespace Whistleblower.Models
             return inquiry;
         }
 
-
-        public Inquiry GetInquiry(int id) {
-            for (int i = 0; i < inquiries.Count; i++) {
-                if (inquiries[i].ID == id) {
+        public Inquiry Retrieve(int id)
+        {
+            for (int i = 0; i < inquiries.Count; i++)
+            {
+                if (inquiries[i].ID == id)
+                {
                     return inquiries[i];
                 }
             }
@@ -79,13 +104,15 @@ namespace Whistleblower.Models
             return null;
         }
 
-        public List<Inquiry> GetAllInquiries () {
+        public List<Inquiry> RetrieveAll()
+        {
             return inquiries;
         }
 
-        public void RemoveInquiry(Inquiry inquiry)
+        public void Delete(Inquiry inquiry)
         {
             inquiries.Remove(inquiry);
         }
+        #endregion
     }
 }

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Whistleblower.Models
 {
-    public class EncryptionHandler
+    public static class EncryptionHandler
     {
         private static string key = "b14ca5898a4e4133bbce2ea2315a1916";
 
-        public string EncryptString(string plainText)
+        public static string EncryptString(string plainText)
         {
             byte[] iv = new byte[16];
             byte[] array;
@@ -41,7 +41,7 @@ namespace Whistleblower.Models
             return Convert.ToBase64String(array);
         }
 
-        public string DecryptString(string cipherText)
+        public static string DecryptString(string cipherText)
         {
             byte[] iv = new byte[16];
             byte[] buffer = Convert.FromBase64String(cipherText);

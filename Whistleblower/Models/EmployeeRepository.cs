@@ -5,50 +5,79 @@ namespace Whistleblower.Models
 {
     public class EmployeeRepository
     {
-        string filePath = Path.GetFullPath(@"..\..\..\Data\EmployeeRepository.txt");
+        #region Singleton
+        private static EmployeeRepository _instance;
+        public static EmployeeRepository Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new EmployeeRepository();
+                    return _instance;
+                }
+                return _instance;
+            }
 
-        EncryptionHandler encryptor;
+            private set
+            {
+                _instance = value;
+            }
+        }
 
-        List<Employee> employees;
-
-        public EmployeeRepository () {
-            encryptor = new EncryptionHandler();
-
+        private EmployeeRepository()
+        {
             employees = new List<Employee>();
             Load();
         }
+        #endregion
 
-        public void Save () {
+        private string filePath = Path.GetFullPath(@"..\..\..\Data\EmployeeRepository.txt");
+
+        private List<Employee> employees;
+
+        #region Persistance
+        public void Save()
+        {
             if (!File.Exists(filePath))
                 File.Create(filePath).Close();
 
-            using (StreamWriter sw = new StreamWriter(filePath, false)) {
-                foreach (Employee employee in employees) {
-                    string encryptedEmployee = encryptor.EncryptString(employee.GetCSVFormat());
-                    sw.WriteLine(encryptedEmployee);
+            using (StreamWriter sw = new StreamWriter(filePath, false))
+            {
+                foreach (Employee employee in employees)
+                {
+                    string encryptedString = EncryptionHandler.EncryptString(employee.GetCSVFormat());
+                    sw.WriteLine(encryptedString);
                 }
             }
         }
 
-        public void Load () {
-            using (StreamReader sr = new StreamReader(filePath)) {
-                while (!sr.EndOfStream) {
+        public void Load()
+        {
+            using (StreamReader sr = new StreamReader(filePath))
+            {
+                while (!sr.EndOfStream)
+                {
                     //string decryptedEmployee = encryptor.DecryptString(sr.ReadLine());
                     string decryptedString = sr.ReadLine();
-                    string[] splitLine = decryptedString.Split(';');
+                    string[] parts = decryptedString.Split(';');
 
-                    Employee employee = new Employee(
-                        splitLine[0],
-                        bool.Parse(splitLine[1]),
-                        splitLine[2],
-                        splitLine[3]);
+                    string name = parts[0];
+                    bool isHR = bool.Parse(parts[1]);
+                    string username = parts[2];
+                    string password = parts[3];
+
+                    Employee employee = new Employee(name, isHR, username, password);
 
                     employees.Add(employee);
                 }
             }
         }
+        #endregion
 
-        public Employee AddEmployee (string name, bool isHR, string username, string password) {
+        #region CRUD
+        public Employee Create(string name, bool isHR, string username, string password)
+        {
             Employee employee = new Employee(name, isHR, username, password);
 
             employees.Add(employee);
@@ -56,9 +85,12 @@ namespace Whistleblower.Models
             return employee;
         }
 
-        public Employee GetEmployee (int id) {
-            for (int i = 0; i < employees.Count; i++) {
-                if (employees[i].ID == id) {
+        public Employee Retrieve(int id)
+        {
+            for (int i = 0; i < employees.Count; i++)
+            {
+                if (employees[i].ID == id)
+                {
                     return employees[i];
                 }
             }
@@ -66,28 +98,37 @@ namespace Whistleblower.Models
             return null;
         }
 
-        public void UpdateUsername (int id, string username) {
-            for (int i = 0; i < employees.Count; i++) {
-                if (id == employees[i].ID) {
+        public List<Employee> RetrieveAll()
+        {
+            return employees;
+        }
+
+        public void UpdateUsername(int id, string username)
+        {
+            for (int i = 0; i < employees.Count; i++)
+            {
+                if (id == employees[i].ID)
+                {
                     employees[i].Username = username;
                 }
             }
         }
 
-        public void UpdatePassword (int id, string password) {
-            for (int i = 0; i < employees.Count; i++) {
-                if (id == employees[i].ID) {
+        public void UpdatePassword(int id, string password)
+        {
+            for (int i = 0; i < employees.Count; i++)
+            {
+                if (id == employees[i].ID)
+                {
                     employees[i].Password = password;
                 }
             }
         }
 
-        public void DeleteEmployee (Employee employee) {
+        public void Delete(Employee employee)
+        {
             employees.Remove(employee);
         }
-
-        public List<Employee> GetAll () {
-            return employees;
-        }
+        #endregion
     }
 }
