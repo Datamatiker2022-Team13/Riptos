@@ -11,10 +11,14 @@ namespace Whistleblower.Models
 {
     public class InquiryRepository
     {
-        string fileName = "test.txt";
+        string fileName = "InquiryRepository.txt";
         List<Inquiry> inquiries = new List<Inquiry>();
         EncryptionHandler ec = new EncryptionHandler(); 
         
+        public InquiryRepository () {
+            inquiries = Load();
+        }
+
         public void StorageStart(string filename)
         {
             try
@@ -68,24 +72,10 @@ namespace Whistleblower.Models
                     List<Inquiry> strings = new List<Inquiry>();
                     while (!sr.EndOfStream)
                     {
-                        int i = 0;
-                        if (inquiries[i].IsAnonymous == true)//TODO Fix this if statement, u cant use the list here, cause the list will be reset every time the program starts.
-                        {
-                            line = sr.ReadLine();
-                            string[] tempList1 = line.Split("^");
-                            Inquiry inq = new Inquiry(tempList1[i], (SubjectType)Enum.Parse(typeof(SubjectType), tempList1[i + 1]), new Message(null, ec.DecryptString(tempList1[i + 2]), DateTime.Now), Convert.ToBoolean(tempList1[i + 3]), new Employee(ec.DecryptString(tempList1[i + 4]), false, null, null), new Employee(ec.DecryptString(tempList1[i + 5]), false, null, null));
-                            strings.Add(inq);
-
-                        }
-                        else
-                        {
-                            line = sr.ReadLine();
-                            string[] tempList1 = line.Split("^");
-                            Inquiry inq = new Inquiry(tempList1[i], (SubjectType)Enum.Parse(typeof(SubjectType), tempList1[i + 1]), new Message(null, tempList1[i + 2], DateTime.Now), Convert.ToBoolean(tempList1[i + 3]), new Employee(tempList1[i + 4], false, null, null), new Employee(tempList1[i + 5], false, null, null));
-                            strings.Add(inq);
-                        }
-
-                        i += 1;
+                        line = sr.ReadLine();
+                        string[] tempList1 = line.Split("^");
+                        Inquiry inq = new Inquiry(tempList1[0], (SubjectType)Enum.Parse(typeof(SubjectType), tempList1[1]), new Message(null, tempList1[2], DateTime.Now), Convert.ToBoolean(tempList1[3]), new Employee(tempList1[4], false, null, null), new Employee(tempList1[5], false, null, null));
+                        strings.Add(inq);
                     }
                     return strings;
 
@@ -128,8 +118,11 @@ namespace Whistleblower.Models
             return null;
         }
 
-    public void RemoveInquiry(Inquiry inquiry)
+        public List<Inquiry> GetAllInquiries () {
+            return inquiries;
+        }
 
+        public void RemoveInquiry(Inquiry inquiry)
         {
             inquiries.Remove(inquiry);
         }

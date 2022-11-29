@@ -4,7 +4,7 @@ namespace Whistleblower.ViewModels
 {
     public class InquiryViewModel
     {
-        public Inquiry source;
+        private Inquiry source;
 
         public Employee Sender { get; set; }
         public Employee Receiver { get; set; }
@@ -24,6 +24,10 @@ namespace Whistleblower.ViewModels
             Subject = source.Subject;
             Conversation = source.Conversation;
             IsAnonymous = source.IsAnonymous;
+        }
+
+        public void DeleteInquiry (InquiryRepository inquiryRepo) {
+            inquiryRepo.RemoveInquiry(source);
         }
     }
 }
