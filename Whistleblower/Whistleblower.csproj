@@ -8,7 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Views\" />
+    <None Remove="Views\Kong Kajs Karusel.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\Kong Kajs Karusel.png" />
   </ItemGroup>
 
 </Project>
