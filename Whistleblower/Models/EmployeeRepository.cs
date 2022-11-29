@@ -1,80 +1,96 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 
 namespace Whistleblower.Models
 {
     public class EmployeeRepository
     {
-        List<Employee> employees = new List<Employee>();
-
-        /// <summary>
-        /// Hardcoded string, edit this in future iterations
-        /// </summary>
-        string fileName = @"C:\Users\cappe\Desktop\Getting-Real\Riptos\LoginData.txt";
-
-        public void StorageStart (string filename) {
-            try {
-                if (!File.Exists(fileName)) {
-                    using (FileStream fs = File.Create(filename)) ;
+        #region Singleton
+        private static EmployeeRepository _instance;
+        public static EmployeeRepository Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new EmployeeRepository();
+                    return _instance;
                 }
+                return _instance;
             }
-            catch (Exception ex) {
-                Console.WriteLine(ex.Message);
+
+            private set
+            {
+                _instance = value;
             }
         }
 
-        EncryptionHandler ec = new EncryptionHandler();
+        private EmployeeRepository()
+        {
+            employees = new List<Employee>();
+            Load();
+        }
+        #endregion
 
-        public void save () {
-            //Hvis man gemmer listen igen, vil alle ting i listen blive gemt, dog hvis dette,
-            //allerede har været gjort tidligere vil den gemme de samme ting igen.
-            //Dette skal ændres da det er lort.
-            try {
-                StorageStart(fileName);
-                using (StreamWriter sw = new StreamWriter(fileName, true)) {
-                    sw.WriteLine(employees[0].Name + "," + employees[0].IsHR + "," + ec.EncryptString(employees[0].Username) + "," + ec.EncryptString(employees[0].Password));
+        private string filePath = Path.GetFullPath(@"..\..\..\Data\EmployeeRepository.txt");
+
+        private List<Employee> employees;
+
+        #region Persistance
+        public void Save()
+        {
+            if (!File.Exists(filePath))
+                File.Create(filePath).Close();
+
+            using (StreamWriter sw = new StreamWriter(filePath, false))
+            {
+                foreach (Employee employee in employees)
+                {
+                    string encryptedString = EncryptionHandler.EncryptString(employee.GetCSVFormat());
+                    sw.WriteLine(encryptedString);
                 }
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex.Message);
             }
         }
-        public List<Employee> load () {
-            try {
-                StorageStart(fileName);
-                using (StreamReader sr = new StreamReader(fileName)) {
-                    string line;
-                    List<Employee> strings = new List<Employee>();
-                    while (!sr.EndOfStream) {
 
-                        line = sr.ReadLine();
-                        string[] tempList = line.Split(",");
-                        Employee emp = new Employee(tempList[0], Convert.ToBoolean(tempList[1]), ec.DecryptString(tempList[2]), ec.DecryptString(tempList[3]));
-                        strings.Add(emp);
-                        //strings.Add(line = sr.ReadLine());
-                    }
+        public void Load()
+        {
+            using (StreamReader sr = new StreamReader(filePath))
+            {
+                while (!sr.EndOfStream)
+                {
+                    //string decryptedEmployee = encryptor.DecryptString(sr.ReadLine());
+                    string decryptedString = sr.ReadLine();
+                    string[] parts = decryptedString.Split(';');
 
-                    return strings;
-                }
-            }
-            catch (Exception ex) {
-                return null;
-            }
-        }
-        public void AddEmployee (Employee employee) {
-            for (int i = 0; i < employees.Count; i++) {
-                if (employee.Username == employees[i].Username) {
-                    Console.WriteLine("Dit navn er taget din klump");
-                }
-                else {
+                    string name = parts[0];
+                    bool isHR = bool.Parse(parts[1]);
+                    string username = parts[2];
+                    string password = parts[3];
+
+                    Employee employee = new Employee(name, isHR, username, password);
+
                     employees.Add(employee);
                 }
             }
         }
-        public Employee GetEmployee (string username) {
-            for (int i = 0; i < employees.Count; i++) {
-                if (employees[i].Username == username) {
+        #endregion
+
+        #region CRUD
+        public Employee Create(string name, bool isHR, string username, string password)
+        {
+            Employee employee = new Employee(name, isHR, username, password);
+
+            employees.Add(employee);
+
+            return employee;
+        }
+
+        public Employee Retrieve(int id)
+        {
+            for (int i = 0; i < employees.Count; i++)
+            {
+                if (employees[i].ID == id)
+                {
                     return employees[i];
                 }
             }
@@ -82,28 +98,37 @@ namespace Whistleblower.Models
             return null;
         }
 
-        public void UpdateUsername (Employee employee, string username) {
-            for (int i = 0; i < employees.Count; i++) {
-                if (employee.Username == employees[i].Username && employee.Password == employees[i].Password) {
+        public List<Employee> RetrieveAll()
+        {
+            return employees;
+        }
+
+        public void UpdateUsername(int id, string username)
+        {
+            for (int i = 0; i < employees.Count; i++)
+            {
+                if (id == employees[i].ID)
+                {
                     employees[i].Username = username;
                 }
             }
         }
 
-        public void UpdatePassword (Employee employee, string password) {
-            for (int i = 0; i < employees.Count; i++) {
-                if (employee.Username == employees[i].Username && employee.Password == employees[i].Password) {
+        public void UpdatePassword(int id, string password)
+        {
+            for (int i = 0; i < employees.Count; i++)
+            {
+                if (id == employees[i].ID)
+                {
                     employees[i].Password = password;
                 }
             }
         }
 
-        public void DeleteEmployee (Employee employee) {
+        public void Delete(Employee employee)
+        {
             employees.Remove(employee);
         }
-
-        public List<Employee> GetAll () {
-            return employees;
-        }
+        #endregion
     }
 }

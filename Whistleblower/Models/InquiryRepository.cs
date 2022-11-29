@@ -1,115 +1,101 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.ExceptionServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Whistleblower.Models
 {
     public class InquiryRepository
     {
-        string fileName = "InquiryRepository.txt";
-        List<Inquiry> inquiries = new List<Inquiry>();
-        EncryptionHandler ec = new EncryptionHandler(); 
-        
-        public InquiryRepository () {
-            inquiries = Load();
-        }
-
-        public void StorageStart(string filename)
+        #region Singleton
+        private static InquiryRepository? _instance;
+        /// <summary>
+        /// NOT THREAD SAFE
+        /// </summary>
+        public static InquiryRepository Instance
         {
-            try
+            get
             {
-                if (!File.Exists(fileName))
+                if (_instance == null)
                 {
-                    using (FileStream fs = File.Create(filename)) ;
+                    _instance = new InquiryRepository();
+                    return _instance;
                 }
+                return _instance;
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
 
-        public void Save(string message)
-        {
-            try
+            private set
             {
-                StorageStart(fileName);
-                using (StreamWriter sw = new StreamWriter(fileName, true))
-
-                {
-                    for (int i = 0; i < inquiries.Count; i++)
-                    {
-                        if (inquiries[i].IsAnonymous == true)
-                        {
-                            sw.WriteLine(inquiries[i].Title + "^" + inquiries[i].Subject + "^" + ec.EncryptString(Convert.ToString(inquiries[i].Conversation)) + "^" + inquiries[i].IsAnonymous + "^" + ec.EncryptString(Convert.ToString(inquiries[i].Sender)) + "^" + inquiries[i].Receiver);
-                        }
-                        else
-                        {
-                            sw.WriteLine(inquiries[i].Title + "^" + inquiries[i].Subject + "^" + inquiries[i].Conversation + "^" + inquiries[i].IsAnonymous + "^" + inquiries[i].Sender + "^" + inquiries[i].Receiver);
-                        }
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-        public List<Inquiry> Load()
-        {
-            try
-            {
-                StorageStart(fileName);
-                using (StreamReader sr = new StreamReader(fileName))
-                {
-                    string line;
-                    List<Inquiry> strings = new List<Inquiry>();
-                    while (!sr.EndOfStream)
-                    {
-                        line = sr.ReadLine();
-                        string[] tempList1 = line.Split("^");
-                        Inquiry inq = new Inquiry(tempList1[0], (SubjectType)Enum.Parse(typeof(SubjectType), tempList1[1]), new Message(null, tempList1[2], DateTime.Now), Convert.ToBoolean(tempList1[3]), new Employee(tempList1[4], false, null, null), new Employee(tempList1[5], false, null, null));
-                        strings.Add(inq);
-                    }
-                    return strings;
-
-                }
-            }
-            catch (Exception ex)
-            {
-                return null;
-
+                _instance = value;
             }
         }
 
-        public void AddInquiry(Inquiry inquiry)
+        private InquiryRepository()
         {
-            for (int i = 0; i < inquiries.Count; i++)
+            inquiries = new List<Inquiry>();
+            Load();
+        }
+        #endregion
+
+        private string filePath = Path.GetFullPath(@"..\..\..\Data\InquiryRepository.txt");
+
+        private List<Inquiry> inquiries;
+
+        #region Persistance
+        public void Save()
+        {
+            if (!File.Exists(filePath))
+                File.Create(filePath).Close();
+
+            using (StreamWriter sw = new StreamWriter(filePath, false))
             {
-                if (inquiry.Title == inquiries[i].Title)
+                foreach (Inquiry inquiry in inquiries)
                 {
-                    Console.WriteLine("Denne henvendelse er i forvejen oprettet");
+                    string encryptedString = EncryptionHandler.EncryptString(inquiry.GetCSVFormat());
+                    sw.WriteLine(encryptedString);
                 }
-                else
+            }
+        }
+
+        public void Load()
+        {
+            using (StreamReader sr = new StreamReader(filePath))
+            {
+                while (!sr.EndOfStream)
                 {
+                    //string decryptedString = encryptor.DecryptString(sr.ReadLine());
+                    string decryptedString = sr.ReadLine();
+                    string[] parts = decryptedString.Split(';');
+
+                    Employee sender = EmployeeRepository.Instance.Retrieve(int.Parse(parts[0]));
+                    Employee receiver = EmployeeRepository.Instance.Retrieve(int.Parse(parts[1]));
+                    string title = parts[2];
+                    SubjectType subject = (SubjectType) Enum.Parse(typeof(SubjectType), parts[3]);
+                    Message conversation = MessageRepository.Instance.Retrieve(int.Parse(parts[4]));
+                    bool isAnonymous = bool.Parse(parts[5]);
+
+                    Inquiry inquiry = new Inquiry(sender, receiver, title, subject, conversation, isAnonymous);
+
                     inquiries.Add(inquiry);
                 }
-
             }
         }
+        #endregion
 
+        #region CRUD
+        public Inquiry Create(Employee sender, Employee receiver, string title, SubjectType subject, Message message, bool isAnonymous)
+        {
+            Inquiry inquiry = new Inquiry(sender, receiver, title, subject, message, isAnonymous);
 
-        public Inquiry GetInquiry(string title)
+            inquiries.Add(inquiry);
+
+            return inquiry;
+        }
+
+        public Inquiry Retrieve(int id)
         {
             for (int i = 0; i < inquiries.Count; i++)
             {
-                if (inquiries[i].Title == title)
+                if (inquiries[i].ID == id)
                 {
                     return inquiries[i];
                 }
@@ -118,13 +104,15 @@ namespace Whistleblower.Models
             return null;
         }
 
-        public List<Inquiry> GetAllInquiries () {
+        public List<Inquiry> RetrieveAll()
+        {
             return inquiries;
         }
 
-        public void RemoveInquiry(Inquiry inquiry)
+        public void Delete(Inquiry inquiry)
         {
             inquiries.Remove(inquiry);
         }
+        #endregion
     }
 }

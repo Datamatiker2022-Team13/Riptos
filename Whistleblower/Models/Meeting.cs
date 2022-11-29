@@ -5,10 +5,14 @@ namespace Whistleblower.Models
     public class Meeting
     {
         public string Title { get; set; }
-        public DateTime PlannedTime { get; set; }
+        public DateTime ScheduledTime { get; set; }
         public bool InPerson { get; set; }
 
-        // TODO : Add a constructor here, when necessary
+        public Meeting (string title, DateTime scheduledTime, bool inPerson) {
+            Title = title;
+            ScheduledTime = scheduledTime;
+            InPerson = inPerson;
+        }
     }
 
 }
