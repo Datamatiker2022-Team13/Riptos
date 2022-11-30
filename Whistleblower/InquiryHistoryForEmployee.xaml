@@ -5,11 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Whistleblower"
         mc:Ignorable="d"
-        Title="InquiryHistoryForEmployee" Height="450" Width="800">
+        Title="InquiryHistoryForEmployee" Height="700
+        " Width="800">
     <Grid>
-        <ListBox x:Name="ListInquaries" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,93,630,162"/>
-        <Button x:Name="bntCreateInquiry" Content="Opret besked" HorizontalAlignment="Left" Margin="10,375,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.076,-0.424"/>
-        <Button x:Name="bntProfile" Content="Velkommen:&quot;Bruger&quot;" HorizontalAlignment="Left" Margin="9,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.381,-0.354"/>
 
+        <Rectangle HorizontalAlignment="Left" Height="684" Stroke="Black" VerticalAlignment="Center" Width="247" Margin="1,0,0,0"/>
+
+        <ListBox x:Name="ListInquaries" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="1,61,562,86"/>
+        <Button x:Name="bntCreateInquiry" Content="Opret besked" HorizontalAlignment="Left" Margin="71,622,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.076,-0.424" Height="37" Width="106"/>
+        <Button x:Name="bntProfile" Content="&quot;Bruger&quot;" HorizontalAlignment="Left" Margin="98,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.381,-0.354" FontWeight="SemiBold" BorderBrush="{x:Null}" Background="{x:Null}"/>
+        <Label x:Name="lblName" Content="Velkommen: " HorizontalAlignment="Left" Margin="20,18,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="txtbMessage" HorizontalAlignment="Left" Margin="265,119,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="139" Width="500"/>
+        <Label x:Name="lblTitle" Content="Titel: " HorizontalAlignment="Left" Margin="265,31,0,0" VerticalAlignment="Top" FontSize="22"/>
+        <Label x:Name="lblSubjects" Content="Emne(r): " HorizontalAlignment="Left" Margin="265,75,0,0" VerticalAlignment="Top" FontSize="22"/>
     </Grid>
 </Window>

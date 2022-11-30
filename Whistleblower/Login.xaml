@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Whistleblower"
         mc:Ignorable="d"
-        Title="Login" Height="600
+        Title="Login" Height="500
         " Width="800">
     <Grid>
         <Label Content="Username" HorizontalAlignment="Left" Margin="356,133,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="SemiBold"/>
-        <Button x:Name="bntLogin" Content="Login" HorizontalAlignment="Left" Margin="341,405,0,0" VerticalAlignment="Top" Click="bntLogin_Click" Height="40" Width="115"/>
+        <Button x:Name="bntLogin" Content="Login" HorizontalAlignment="Left" Margin="293,405,0,0" VerticalAlignment="Top" Click="bntLogin_Click" Height="40" Width="197"/>
         <Label Content="Password" HorizontalAlignment="Left" Margin="359,221,0,0" VerticalAlignment="Top" FontWeight="SemiBold" FontSize="16"/>
         <TextBox x:Name="txtUserName" HorizontalAlignment="Left" Margin="293,169,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="197" Height="29"/>
         <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="293,258,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="197" Height="29"/>

@@ -7,14 +7,18 @@
         mc:Ignorable="d"
         Title="SendInquary" Height="450" Width="800">
     <Grid>
-        <ListBox x:Name="ListInquaries" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,93,630,162"/>
-        <Button x:Name="bntCreateInquiry" Content="Opret besked" HorizontalAlignment="Left" Margin="10,375,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.076,-0.424"/>
-        <TextBox x:Name="txtTitle" HorizontalAlignment="Left" Margin="327,93,0,0" TextWrapping="Wrap" Text="Title" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="bntSubject" Content="Vælg Emner" HorizontalAlignment="Left" Margin="327,183,0,0" VerticalAlignment="Top"/>
-        <TextBlock x:Name="txtChosenSubjects" HorizontalAlignment="Left" Margin="447,183,0,0" TextWrapping="Wrap" Text="Valgte emner" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtMessage" HorizontalAlignment="Left" Margin="327,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="332" Height="178"/>
-        <Button x:Name="txtSendInquiry" Content="Send Henvendelse" HorizontalAlignment="Left" Margin="327,400,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="bntProfile" Content="Velkommen:&quot;Bruger&quot;" HorizontalAlignment="Left" Margin="9,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.381,-0.354"/>
+
+        <Rectangle HorizontalAlignment="Left" Height="434" Stroke="Black" VerticalAlignment="Center" Width="247"/>
+
+        <ListBox x:Name="ListInquaries" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="1,61,562,86"/>
+        <Button x:Name="bntCreateInquiry" Content="Opret besked" HorizontalAlignment="Left" Margin="56,377,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.076,-0.424" Height="37" Width="106"/>
+        <TextBox x:Name="txtTitle" HorizontalAlignment="Left" Margin="327,59,0,0" TextWrapping="Wrap" Text="Title" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="bntSubject" Content="Vælg Emner" HorizontalAlignment="Left" Margin="327,93,0,0" VerticalAlignment="Top" Width="87"/>
+        <TextBlock x:Name="txtChosenSubjects" HorizontalAlignment="Left" Margin="330,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Valgte emner: " Width="84"/>
+        <TextBox x:Name="txtMessage" HorizontalAlignment="Left" Margin="327,152,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" Height="195"/>
+        <Button x:Name="txtSendInquiry" Content="Send Henvendelse" HorizontalAlignment="Left" Margin="583,377,0,0" VerticalAlignment="Top" Height="37" Width="106"/>
+        <Button x:Name="bntProfile" Content="&quot;Bruger&quot;" HorizontalAlignment="Left" Margin="98,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.381,-0.354" FontWeight="SemiBold" BorderBrush="{x:Null}" Background="{x:Null}"/>
+        <Label x:Name="lblName" Content="Velkommen: " HorizontalAlignment="Left" Margin="20,18,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
