@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Whistleblower.ViewModels;
 
 namespace Whistleblower.TEMP
 {
@@ -19,9 +20,20 @@ namespace Whistleblower.TEMP
     /// </summary>
     public partial class CreateInquiry : Window
     {
-        public CreateInquiry()
+        public CreateInquiryViewModel VM { get; set; }
+
+        public CreateInquiry(EmployeeViewModel activeEmployee)
         {
             InitializeComponent();
+
+            VM = new CreateInquiryViewModel(activeEmployee);
+            DataContext = VM;
+        }
+
+        private void SendInquiryButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+            Close();
         }
     }
 }

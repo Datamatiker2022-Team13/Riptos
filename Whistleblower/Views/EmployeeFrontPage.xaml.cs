@@ -11,17 +11,23 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Whistleblower.ViewModels;
 
 namespace Whistleblower
 {
     /// <summary>
-    /// Interaction logic for SendInquary.xaml
+    /// Interaction logic for EmployeeFrontPage.xaml
     /// </summary>
-    public partial class SendInquary : Window
+    public partial class EmployeeFrontPage : Window
     {
-        public SendInquary()
+        public EmployeeMainViewModel VM { get; set; }
+
+        public EmployeeFrontPage()
         {
             InitializeComponent();
+
+            VM = new EmployeeMainViewModel();
+            DataContext = VM;
         }
     }
 }

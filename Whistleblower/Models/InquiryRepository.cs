@@ -88,6 +88,11 @@ namespace Whistleblower.Models
 
             inquiries.Add(inquiry);
 
+            using (StreamWriter sw = new StreamWriter(filePath, true))
+            {
+                sw.WriteLine(inquiry.GetCSVFormat());
+            }
+
             return inquiry;
         }
 

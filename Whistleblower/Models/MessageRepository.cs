@@ -24,7 +24,7 @@ namespace Whistleblower.Models
 
         private MessageRepository () {
             messages = new List<Message>();
-            // TODO : Load();
+            Load();
         }
         #endregion
 
@@ -76,6 +76,11 @@ namespace Whistleblower.Models
             Message message = new Message(sender, content, sendDateTime);
 
             messages.Add(message);
+
+            using (StreamWriter sw = new StreamWriter(filePath, true))
+            {
+                sw.WriteLine(message.GetCSVFormat());
+            }
 
             return message;
         }
