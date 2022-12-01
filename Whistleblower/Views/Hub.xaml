@@ -1,0 +1,33 @@
+﻿<Window x:Class="Whistleblower.Views.Hub"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Whistleblower.Views"
+        mc:Ignorable="d"
+        Title="Hub" Height="400" Width="400">
+    <Grid Margin="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Label x:Name="NameLabel" Content="{Binding ActiveEmployee.Name}" Margin="5"/>
+                <Label x:Name="UsernameLabel" Content="{Binding ActiveEmployee.Username}" Margin="5"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="5">
+                <Button x:Name="ViewInquiriesButton" Grid.Row="1" Content="Se hendenvelser" Padding="10" Margin="5"/>
+                <Button x:Name="ChangeUserInformation" Grid.Row="1" Content="Ændrer brugeroplysninger" Padding="10" Margin="5"/>
+                <TextBox x:Name="TestTextBox" Margin="5"  Text="" TextChanged="TestTextBox_TextChanged"/>
+                <Image x:Name="TestImage" Height="100" Width="100" IsEnabled="False"/>
+
+            </StackPanel>
+        </Grid>
+        
+        <Button x:Name="LogOutButton" Content="Log ud" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="5"/>
+    </Grid>
+    
+</Window>

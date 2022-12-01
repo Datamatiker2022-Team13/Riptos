@@ -3,9 +3,7 @@
     public enum SubjectType
     {
         bullying,
-        dicrimination,
+        discrimination,
         harassment
-
-        // TODO : add more subjectType enums here
     }
 }
