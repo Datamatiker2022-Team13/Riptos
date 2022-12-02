@@ -13,8 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Whistleblower.Models;
-
-
+using Whistleblower.ViewModels;
 
 namespace Whistleblower
 {
@@ -23,12 +22,15 @@ namespace Whistleblower
     /// </summary>
     public partial class Login : Window
     {
+        public LoginViewModel VM;
+
         public Login()
         {
             
             InitializeComponent();
-            
 
+            VM = new LoginViewModel();
+            DataContext = VM;
         }
 
         private void bntLogin_Click(object sender, RoutedEventArgs e)
@@ -62,5 +64,7 @@ namespace Whistleblower
             }
 
         }
+
+
     }
 }
