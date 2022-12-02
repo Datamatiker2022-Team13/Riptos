@@ -30,8 +30,9 @@ namespace Whistleblower.ViewModels
                 InquiryViewModel inquiryVM = null;
 
                 EmployeeViewModel receiverVM = new EmployeeViewModel(inquiry.Receiver);
+                EmployeeViewModel senderVM = new EmployeeViewModel(inquiry.Sender);
 
-                if (receiverVM.Equals(ActiveEmployeeVM))
+                if (receiverVM.Equals(ActiveEmployeeVM) || senderVM.Equals(ActiveEmployeeVM))
                     InquiryVMs.Add(new InquiryViewModel(inquiry));
             }
         }
