@@ -8,23 +8,39 @@
         Title="SendInquary" Height="450" Width="800">
     <Grid>
 
-        <Rectangle HorizontalAlignment="Left" Height="434" Stroke="Black" VerticalAlignment="Center" Width="247"/>
+        <Rectangle HorizontalAlignment="Left" Height="434" Stroke="Black" VerticalAlignment="Center" Width="247" Fill="#FFCACACA"/>
 
-        <ListBox x:Name="ListInquaries" ItemsSource="{Binding InquiryVMs}" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="1,61,562,86">
+        <ListBox x:Name="ListInquaries" ItemsSource="{Binding InquiryVMs}" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,61,562,86" HorizontalAlignment="Center" Width="240" Background="#FFCACACA">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="{Binding Title}"/>
-                        <Label Content="{Binding Subject}"/>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="2,0,2,0" MinWidth="210" MaxWidth="210" Background="#FFF8F8F8">
+                        <Label Content="{Binding Title}" FontWeight="Bold"/>
+                        <Label Content="{Binding Subject}" FontStyle="Italic"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button x:Name="CreateInquiryButton" Command="{Binding ShowCreateInquiryDialogCommand}" CommandParameter="{Binding}" Content="Opret besked" HorizontalAlignment="Left" Margin="51,377,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.076,-0.424" Height="37" Width="137"/>
+        <Button x:Name="CreateInquiryButton" Background="#FF60B9DB" Command="{Binding ShowCreateInquiryDialogCommand}" CommandParameter="{Binding}" Content="Opret besked" HorizontalAlignment="Left" Margin="51,377,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.076,-0.424" Height="37" Width="137" />
         <Button x:Name="ProfileButton" Content="{Binding ActiveEmployeeVM.Name}" HorizontalAlignment="Left" Margin="98,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.381,-0.354" FontWeight="SemiBold" BorderBrush="{x:Null}" Background="{x:Null}"/>
         <Label x:Name="lblName" Content="Velkommen: " HorizontalAlignment="Left" Margin="20,18,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblErrorMessage" Content="Fejl Besked..." HorizontalAlignment="Left" Margin="1329,855,0,0" VerticalAlignment="Top" Height="62" Width="251"/>
-        <Label Content="Whisteblower" HorizontalAlignment="Left" Margin="321,21,0,0" VerticalAlignment="Top" Width="413" HorizontalContentAlignment="Center" FontSize="20"/>
+
+        <StackPanel x:Name="stpNewInquiry" Background="#FF60B9DB" Margin="260,3,10,171" HorizontalAlignment="Left" MinWidth="260" MaxWidth="400" >
+            <Label x:Name="lblTitle" Content="Titel..." Margin="10,0,0,0" Height="31.28" FontSize="16"/>
+            <Label x:Name="lblSubjects" Content="Emner..." Margin="10,0,0,0" Height="31.28" FontSize="16"/>
+            <TextBlock x:Name="txtMessage" TextWrapping="Wrap" Text="Besked..." Background="#FF60B9DB" Margin="10,0,0,0" HorizontalAlignment="Left" MinWidth="250" MaxWidth="500" MinHeight="150" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="-0.298"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="-1.301"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <Label x:Name="lblDate" Content="Dato..." FontStyle="Italic" FontWeight="Thin" Width="50" HorizontalContentAlignment="Center" RenderTransformOrigin="-0.583,0.576" HorizontalAlignment="Left" Margin="0,0,10,0"/>
+
+        </StackPanel>
+
 
     </Grid>
 </Window>
