@@ -22,5 +22,13 @@ namespace Whistleblower.ViewModels
 
             Username = source.Username;
         }
+
+        public bool Equals (EmployeeViewModel employeeVM)
+        {
+            if (source.ID == employeeVM.source.ID)
+                return true;
+
+            return false;
+        }
     }
 }
