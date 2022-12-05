@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Whistleblower.Models
 {
@@ -32,7 +33,8 @@ namespace Whistleblower.Models
 
         public string GetCSVFormat()
         {
-            return string.Format($"{Sender.ID};{Content};{SendDateTime}");
+            string dateTimeFormatted = SendDateTime.ToString("dd-MM-yyyy HH.mm.ss", CultureInfo.CurrentCulture);
+            return string.Format($"{Sender.ID};{Content};{dateTimeFormatted}");
         }
     }
 }

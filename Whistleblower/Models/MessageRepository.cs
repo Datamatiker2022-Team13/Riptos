@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 
 namespace Whistleblower.Models
@@ -24,7 +25,7 @@ namespace Whistleblower.Models
 
         private MessageRepository () {
             messages = new List<Message>();
-            // TODO : Load();
+            Load();
         }
         #endregion
 
@@ -60,7 +61,7 @@ namespace Whistleblower.Models
 
                     Employee sender = EmployeeRepository.Instance.Retrieve(int.Parse(parts[0]));
                     string content = parts[1];
-                    DateTime sendDateTime = DateTime.Parse(parts[2]);
+                    DateTime sendDateTime = DateTime.ParseExact(parts[2], "dd-MM-yyyy HH.mm.ss", CultureInfo.CurrentCulture);
 
                     Message message = new Message(sender, content, sendDateTime);
 
@@ -76,6 +77,11 @@ namespace Whistleblower.Models
             Message message = new Message(sender, content, sendDateTime);
 
             messages.Add(message);
+
+            using (StreamWriter sw = new StreamWriter(filePath, true))
+            {
+                sw.WriteLine(message.GetCSVFormat());
+            }
 
             return message;
         }

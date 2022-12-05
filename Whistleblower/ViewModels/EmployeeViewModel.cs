@@ -7,7 +7,7 @@ namespace Whistleblower.ViewModels
         /// <summary>
         /// The original Employee object that is represented here throught the ViewModel.
         /// </summary>
-        private Employee source;
+        public Employee Source { get; }
 
         public string Name { get; set; }
         public bool IsHR { get; set; }
@@ -15,7 +15,7 @@ namespace Whistleblower.ViewModels
         public string Username { get; set; }
 
         public EmployeeViewModel (Employee source) {
-            this.source = source;
+            Source = source;
 
             Name = source.Name;
             IsHR = source.IsHR;

@@ -1,0 +1,30 @@
+﻿<Window x:Class="Whistleblower.EmployeeFrontPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Whistleblower"
+        mc:Ignorable="d"
+        Title="SendInquary" Height="450" Width="800">
+    <Grid>
+
+        <Rectangle HorizontalAlignment="Left" Height="434" Stroke="Black" VerticalAlignment="Center" Width="247"/>
+
+        <ListBox x:Name="ListInquaries" ItemsSource="{Binding InquiryVMs}" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="1,61,562,86">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding Title}"/>
+                        <Label Content="{Binding Subject}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button x:Name="CreateInquiryButton" Command="{Binding ShowCreateInquiryDialogCommand}" CommandParameter="{Binding}" Content="Opret besked" HorizontalAlignment="Left" Margin="51,377,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.076,-0.424" Height="37" Width="137"/>
+        <Button x:Name="ProfileButton" Content="{Binding ActiveEmployeeVM.Name}" HorizontalAlignment="Left" Margin="98,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.381,-0.354" FontWeight="SemiBold" BorderBrush="{x:Null}" Background="{x:Null}"/>
+        <Label x:Name="lblName" Content="Velkommen: " HorizontalAlignment="Left" Margin="20,18,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblErrorMessage" Content="Fejl Besked..." HorizontalAlignment="Left" Margin="1329,855,0,0" VerticalAlignment="Top" Height="62" Width="251"/>
+        <Label Content="Whisteblower" HorizontalAlignment="Left" Margin="321,21,0,0" VerticalAlignment="Top" Width="413" HorizontalContentAlignment="Center" FontSize="20"/>
+
+    </Grid>
+</Window>

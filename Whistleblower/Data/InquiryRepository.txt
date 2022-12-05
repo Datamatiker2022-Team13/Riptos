@@ -4,3 +4,13 @@
 0;1;Katten karlos spinner hele tiden, men han gør det kun når jeg er i rummet med ham!;discrimination;0;false
 0;1;Jeg er sku ligeglad;bullying;0;true
 0;1;Jeg er sku ligeglad;bullying;0;true
+1;2;Jeg er sku ligeglad;bullying;0;true
+1;2;Jeg er sku ikke så ligeglad mere;bullying;0;true
+2;1;hejsa;bullying;0;False
+2;1;asda;bullying;0;True
+2;1;Det her er min titel;harassment;0;True
+0;1;Morten er ikke et dyr;discrimination;1;False
+0;1;asdasd;harassment;2;False
+0;1;Jackson mangler;discrimination;3;True
+0;1;tests;bullying;4;False
+0;1;se;bullying;5;False
