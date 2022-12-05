@@ -9,7 +9,7 @@
     <Grid>
         <Button Name="bntNewMessage" Content="Create a new Inquiry" HorizontalAlignment="Left" Margin="10,379,0,0" VerticalAlignment="Top" Height="45"/>
         <ListBox Name="lbEmployeeID" ItemsSource="{Binding Path=Inquiries}" SelectedItem="{Binding SelectedInquiry,Mode=TwoWay}" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,52,655,76"/>
-        <TextBox Name="txtMessage1" HorizontalAlignment="Left" Margin="258,30,0,0" TextWrapping="Wrap" Text="{Binding SelectedInquiry.Conversation.Content, Mode=Default, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="168" Height="69" BorderBrush="#FFACABB3"/>
+        <TextBox Name="txtMessage1" HorizontalAlignment="Left" Margin="258,30,0,0" TextWrapping="Wrap" Text="{Binding SelectedInquiry.Conversation.Content, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="168" Height="69" BorderBrush="#FFACABB3"/>
         <Label x:Name="lblDateAndTime" Content="Date And Time" HorizontalAlignment="Left" Margin="256,108,0,0" VerticalAlignment="Top"/>
         <Rectangle HorizontalAlignment="Left" Height="434" Margin="150,0,0,0" Stroke="Black" VerticalAlignment="Center" Width="4"/>
         <Label x:Name="lblVelkommen" Content="Velkommen" HorizontalAlignment="Left" Margin="7,16,0,0" VerticalAlignment="Top"/>

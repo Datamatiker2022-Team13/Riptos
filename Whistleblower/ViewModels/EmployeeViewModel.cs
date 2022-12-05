@@ -25,7 +25,7 @@ namespace Whistleblower.ViewModels
 
         public bool Equals (EmployeeViewModel employeeVM)
         {
-            if (source.ID == employeeVM.source.ID)
+            if (Source.ID == employeeVM.Source.ID)
                 return true;
 
             return false;

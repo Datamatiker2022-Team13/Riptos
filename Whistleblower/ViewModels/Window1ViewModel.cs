@@ -14,7 +14,16 @@ namespace Whistleblower.ViewModels
     {
         public EmployeeViewModel ActiveEmployee { get; set; }
 
-        public InquiryViewModel SelectedInquiry { get; set; }
+        private InquiryViewModel _selectedInquiry;
+        public InquiryViewModel SelectedInquiry
+        {
+            get { return _selectedInquiry; }
+            set
+            {
+                _selectedInquiry = value;
+                OnPropertyChanged(nameof(SelectedInquiry));
+            }
+        }
         public ObservableCollection<InquiryViewModel> Inquiries { get; set; }
 
         public Window1ViewModel ()
