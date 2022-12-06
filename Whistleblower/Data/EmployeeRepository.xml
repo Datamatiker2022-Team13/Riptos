@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Employees>
+  <Employee>
+    <Name>Cykel Myggen Mikkel</Name>
+    <IsHR>false</IsHR>
+    <Username>bzz</Username>
+    <Password>CapperTheSick</Password>
+  </Employee>
+  <Employee>
+    <Name>Uglen Ulf</Name>
+    <IsHR>true</IsHR>
+    <Username>zzz</Username>
+    <Password>JonathanTheSick</Password>
+  </Employee>
+  <Employee>
+    <Name>Frøen Frede</Name>
+    <IsHR>false</IsHR>
+    <Username>quack</Username>
+    <Password>JacksonsGirlIsSick</Password>
+  </Employee>
+</Employees>
