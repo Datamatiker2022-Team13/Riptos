@@ -19,7 +19,7 @@ namespace Whistleblower.Models
         public List<Message> Conversation { get; set; }
         public bool IsAnonymous { get; set; }
 
-        public Inquiry(Employee sender, Employee receiver, string title, SubjectType subject, List<Message> message, bool isAnonymous)
+        public Inquiry(Employee sender, Employee receiver, string title, SubjectType subject, Message message, bool isAnonymous)
         {
             ID = iDCount++;
 
@@ -28,12 +28,15 @@ namespace Whistleblower.Models
 
             Title = title;
             Subject = subject;
-            Conversation = message;
+
+            List<Message> conversation = new List<Message>() { message };
+            Conversation = conversation;
+
             IsAnonymous = isAnonymous;
         }
 
-        public string GetCSVFormat () {
-            return string.Format($"{Sender.ID};{Receiver.ID};{Title};{Subject};{Conversation.ID};{IsAnonymous}");
-        }
+        //public string GetCSVFormat () {
+        //    return string.Format($"{Sender.ID};{Receiver.ID};{Title};{Subject};{Conversation.ID};{IsAnonymous}");
+        //}
     }
 }
