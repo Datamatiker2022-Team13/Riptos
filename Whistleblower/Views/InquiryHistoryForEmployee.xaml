@@ -14,16 +14,22 @@
         <Button x:Name="bntCreateInquiry" Content="Opret besked" HorizontalAlignment="Left" Margin="71,622,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.076,-0.424" Height="37" Width="106"/>
         <Button x:Name="bntProfile" Content="&quot;Bruger&quot;" HorizontalAlignment="Left" Margin="98,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.381,-0.354" FontWeight="SemiBold" BorderBrush="{x:Null}" Background="{x:Null}"/>
         <Label x:Name="lblName" Content="Velkommen: " HorizontalAlignment="Left" Margin="20,18,0,0" VerticalAlignment="Top"/>
-        <StackPanel Margin="248,0,0,417">
-            <StackPanel x:Name="stpNewInquiry">
-                <Label x:Name="lblTitle" Content="Titel..." Margin="10,0,0,0" Height="31.28" FontSize="16"/>
-                <Label x:Name="lblSubjects" Content="Emner..." Margin="10,0,0,0" Height="31.28" FontSize="16"/>
-                <TextBlock x:Name="txtMessage" TextWrapping="Wrap" Text="Besked..." Background="#FF5273DC" Foreground="#FFFFFCFC" Margin="10,0,0,0" Width="NaN" HorizontalAlignment="Left" MinWidth="500" MinHeight="150" MaxWidth="500"/>
-                <Label x:Name="lblDate" Content="Dato..." FontStyle="Italic" FontWeight="Thin" HorizontalAlignment="Right" Width="51" Margin="0,0,10,0" HorizontalContentAlignment="Center"/>
+        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="248,-4,0,170">
+            <ListBox.ItemTemplate>
+            <DataTemplate>
+                <StackPanel Width="725">
+                    <Label Content="Title.." HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="16"/>
+                        <Label Content="Emne.." FontSize="16"></Label>
+                        <TextBlock Text="Besked..." Height="100" Background="#FF728FDC" Foreground="White"></TextBlock>
+                    <Label Content="Dato.." HorizontalAlignment="Right"></Label>
+                </StackPanel>
+            </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
-            </StackPanel>
-            <StackPanel x:Name="stpHRReplay"/>
-
+        <StackPanel Margin="248,519,0,0">
+            <TextBox TextWrapping="Wrap" Text="TextBox" Width="736" HorizontalAlignment="Left" Margin="10,10,0,0" Height="85"/>
+            <Button Content="Send besked" HorizontalAlignment="Right" Margin="0,20,10,0" Padding="5,5,5,5"/>
         </StackPanel>
     </Grid>
 </Window>
