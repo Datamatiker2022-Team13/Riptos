@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Xml;
 
 namespace Whistleblower.Models
 {
@@ -29,44 +30,58 @@ namespace Whistleblower.Models
         }
         #endregion
 
-        private string filePath = Path.GetFullPath(@"..\..\..\Data\MessageRepository.txt");
+        private string filePath = Path.GetFullPath(@"..\..\..\Data\MessageRepository.xml");
 
         private List<Message> messages;
 
         #region Persistance
-
         public void Save()
         {
             if (!File.Exists(filePath))
                 File.Create(filePath).Close();
 
-            using (StreamWriter sw = new StreamWriter(filePath, false))
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+
+            using (XmlWriter writer = XmlWriter.Create(filePath, settings))
             {
+                writer.WriteStartDocument();
+                writer.WriteStartElement("Messages");
                 foreach (Message message in messages)
                 {
-                    string encryptedString = EncryptionHandler.EncryptString(message.GetCSVFormat());
-                    sw.WriteLine(encryptedString);
+                    writer.WriteStartElement("Message");
+
+                    writer.WriteElementString("Sender", message.Sender.ID.ToString());
+                    writer.WriteElementString("Content", message.Content);
+                    writer.WriteElementString("SendDateTime", message.SendDateTime.ToString("dd-MM-yyyy HH.mm.ss", CultureInfo.CurrentCulture));
+
+                    writer.WriteEndElement();
                 }
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
             }
         }
 
         public void Load()
         {
-            using (StreamReader sr = new StreamReader(filePath))
+            XmlReaderSettings settings = new XmlReaderSettings();
+            settings.IgnoreWhitespace = true;
+            settings.IgnoreComments = true;
+
+            using (XmlReader reader = XmlReader.Create(filePath, settings))
             {
-                while (!sr.EndOfStream)
+                reader.ReadToFollowing("Message");
+                do
                 {
-                    string decryptedString = sr.ReadLine();
-                    string[] parts = decryptedString.Split(';');
+                    reader.ReadToFollowing("Sender");
 
-                    Employee sender = EmployeeRepository.Instance.Retrieve(int.Parse(parts[0]));
-                    string content = parts[1];
-                    DateTime sendDateTime = DateTime.ParseExact(parts[2], "dd-MM-yyyy HH.mm.ss", CultureInfo.CurrentCulture);
+                    Employee sender = EmployeeRepository.Instance.Retrieve(reader.ReadElementContentAsInt());
+                    string content = reader.ReadElementContentAsString();
+                    DateTime sendDateTime = DateTime.ParseExact(reader.ReadElementContentAsString(), "dd-MM-yyyy HH.mm.ss", CultureInfo.CurrentCulture);
 
-                    Message message = new Message(sender, content, sendDateTime);
-
-                    messages.Add(message);
+                    messages.Add(new Message(sender, content, sendDateTime));
                 }
+                while (reader.ReadToFollowing("Message"));
             }
         }
         #endregion
