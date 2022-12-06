@@ -16,13 +16,13 @@ using Whistleblower.ViewModels;
 namespace Whistleblower.Views
 {
     /// <summary>
-    /// Interaction logic for ViewInquiries.xaml
+    /// Interaction logic for ViewInquiriesTemp.xaml
     /// </summary>
-    public partial class ViewInquiries : Window
+    public partial class ViewInquiriesTemp : Window
     {
         public ViewInquiriesViewModel ViewInquiriesVM { get; set; }
 
-        public ViewInquiries () {
+        public ViewInquiriesTemp () {
             InitializeComponent();
 
             ViewInquiriesVM = new ViewInquiriesViewModel();

@@ -1,4 +1,5 @@
-﻿using Whistleblower.Models;
+﻿using System.Collections.ObjectModel;
+using Whistleblower.Models;
 
 namespace Whistleblower.ViewModels
 {
@@ -11,7 +12,7 @@ namespace Whistleblower.ViewModels
 
         public string Title { get; set; }
         public SubjectType Subject { get; set; }
-        public Message Conversation { get; set; }
+        public ObservableCollection<Message> Conversation { get; set; }
         public bool IsAnonymous { get; set; }
 
         public InquiryViewModel (Inquiry source) {
@@ -22,12 +23,12 @@ namespace Whistleblower.ViewModels
 
             Title = source.Title;
             Subject = source.Subject;
-            Conversation = source.Conversation;
+            Conversation = new ObservableCollection<Message>(source.Conversation);
             IsAnonymous = source.IsAnonymous;
         }
 
-        public void DeleteInquiry (InquiryRepository inquiryRepo) {
-            inquiryRepo.Delete(source);
+        public void Delete () {
+            InquiryRepository.Instance.Delete(source);
         }
     }
 }

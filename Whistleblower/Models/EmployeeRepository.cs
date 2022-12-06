@@ -125,9 +125,9 @@ namespace Whistleblower.Models
             }
         }
 
-        public void Delete(Employee employee)
+        public void Delete(int id)
         {
-            employees.Remove(employee);
+            employees.Remove(Retrieve(id));
         }
         #endregion
     }

@@ -1,4 +1,4 @@
-﻿using System.Security.Cryptography.Pkcs;
+﻿using System.Collections.Generic;
 
 namespace Whistleblower.Models
 {
@@ -16,10 +16,10 @@ namespace Whistleblower.Models
 
         public string Title { get; set; }
         public SubjectType Subject { get; set; }
-        public Message Conversation { get; set; }
+        public List<Message> Conversation { get; set; }
         public bool IsAnonymous { get; set; }
 
-        public Inquiry(Employee sender, Employee receiver, string title, SubjectType subject, Message message, bool isAnonymous)
+        public Inquiry(Employee sender, Employee receiver, string title, SubjectType subject, List<Message> message, bool isAnonymous)
         {
             ID = iDCount++;
 
