@@ -47,7 +47,7 @@ namespace Whistleblower.Commands
                     vm.ActiveEmployee.Source,
                     EmployeeRepository.Instance.Retrieve(1),
                     vm.Title,
-                    vm.ChosenSubject,
+                    new List<SubjectType>() { vm.ChosenSubject },
                     MessageRepository.Instance.Create(
                         vm.ActiveEmployee.Source,
                         vm.Content,

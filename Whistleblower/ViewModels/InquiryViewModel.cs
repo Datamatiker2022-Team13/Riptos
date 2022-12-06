@@ -11,7 +11,7 @@ namespace Whistleblower.ViewModels
         public Employee Receiver { get; set; }
 
         public string Title { get; set; }
-        public SubjectType Subject { get; set; }
+        public ObservableCollection<SubjectType> Subjects { get; set; }
         public ObservableCollection<Message> Conversation { get; set; }
         public bool IsAnonymous { get; set; }
 
@@ -22,7 +22,7 @@ namespace Whistleblower.ViewModels
             Receiver = source.Receiver;
 
             Title = source.Title;
-            Subject = source.Subject;
+            Subjects = new ObservableCollection<SubjectType>(source.Subjects);
             Conversation = new ObservableCollection<Message>(source.Conversation);
             IsAnonymous = source.IsAnonymous;
         }

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Inquiries>
+  <Inquiry>
+    <Sender>2</Sender>
+    <Receiver>2</Receiver>
+    <Title>se her min ven</Title>
+    <Subjects>
+      <Subject>discrimination</Subject>
+      <Subject>harassment</Subject>
+      <Subject>bullying</Subject>
+    </Subjects>
+    <Conversation>
+      <Message>1</Message>
+      <Message>3</Message>
+      <Message>4</Message>
+    </Conversation>
+    <IsAnonymous>false</IsAnonymous>
+  </Inquiry>
+  <Inquiry>
+    <Sender>0</Sender>
+    <Receiver>1</Receiver>
+    <Title>Test henvendelse</Title>
+    <Subjects>
+      <Subject>discrimination</Subject>
+    </Subjects>
+    <Conversation>
+      <Message>8</Message>
+    </Conversation>
+    <IsAnonymous>true</IsAnonymous>
+  </Inquiry>
+</Inquiries>

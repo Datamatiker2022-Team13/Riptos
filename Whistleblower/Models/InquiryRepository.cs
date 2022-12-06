@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Whistleblower.Models
 {
@@ -36,7 +39,7 @@ namespace Whistleblower.Models
         }
         #endregion
 
-        private string filePath = Path.GetFullPath(@"..\..\..\Data\InquiryRepository.txt");
+        private string filePath = Path.GetFullPath(@"..\..\..\Data\InquiryRepository.xml");
 
         private List<Inquiry> inquiries;
 
@@ -46,52 +49,118 @@ namespace Whistleblower.Models
             if (!File.Exists(filePath))
                 File.Create(filePath).Close();
 
-            using (StreamWriter sw = new StreamWriter(filePath, false))
+            XmlWriterSettings writerSettings = new XmlWriterSettings();
+            writerSettings.Indent = true;
+
+            using (XmlWriter writer = XmlWriter.Create(filePath, writerSettings))
             {
+                writer.WriteStartDocument();
+                writer.WriteStartElement("Inquiries");
                 foreach (Inquiry inquiry in inquiries)
                 {
-                    string encryptedString = EncryptionHandler.EncryptString(inquiry.GetCSVFormat());
-                    sw.WriteLine(encryptedString);
+                    writer.WriteStartElement("Inquiry");
+
+                    writer.WriteElementString("Sender", inquiry.Sender.ID.ToString());
+                    writer.WriteElementString("Receiver", inquiry.Receiver.ID.ToString());
+                    writer.WriteElementString("Title", inquiry.Title);
+
+                    writer.WriteStartElement("Subjects");
+                    foreach (SubjectType subject in inquiry.Subjects)
+                    {
+                        writer.WriteElementString("Subject", subject.ToString());
+                    }
+                    writer.WriteEndElement();
+
+                    writer.WriteStartElement("Conversation");
+                    foreach (Message message in inquiry.Conversation)
+                    {
+                        writer.WriteElementString("Message", message.ID.ToString());
+                    }
+                    writer.WriteEndElement();
+
+                    writer.WriteElementString("IsAnonymous", inquiry.IsAnonymous.ToString().ToLower());
+
+                    writer.WriteEndElement();
                 }
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
             }
         }
 
         public void Load()
         {
-            using (StreamReader sr = new StreamReader(filePath))
+            XmlReaderSettings settings = new XmlReaderSettings();
+            settings.IgnoreWhitespace = true;
+            settings.IgnoreComments = true; // most likely unnecessary
+            
+            using (XmlReader reader = XmlReader.Create(filePath, settings))
             {
-                while (!sr.EndOfStream)
+                reader.ReadToFollowing("Inquiry");
+                do
                 {
-                    //string decryptedString = encryptor.DecryptString(sr.ReadLine());
-                    string decryptedString = sr.ReadLine();
-                    string[] parts = decryptedString.Split(';');
+                    reader.ReadToFollowing("Sender");
 
-                    Employee sender = EmployeeRepository.Instance.Retrieve(int.Parse(parts[0]));
-                    Employee receiver = EmployeeRepository.Instance.Retrieve(int.Parse(parts[1]));
-                    string title = parts[2];
-                    SubjectType subject = (SubjectType) Enum.Parse(typeof(SubjectType), parts[3]);
-                    Message conversation = MessageRepository.Instance.Retrieve(int.Parse(parts[4]));
-                    bool isAnonymous = bool.Parse(parts[5]);
+                    Employee sender = EmployeeRepository.Instance.Retrieve(reader.ReadElementContentAsInt());
+                    Employee receiver = EmployeeRepository.Instance.Retrieve(reader.ReadElementContentAsInt());
+                    string title = reader.ReadElementContentAsString();
 
-                    Inquiry inquiry = new Inquiry(sender, receiver, title, subject, conversation, isAnonymous);
+                    List<SubjectType> subjects = new List<SubjectType>();
+                    XmlReader subtreeReader = reader.ReadSubtree();
 
-                    inquiries.Add(inquiry);
+                    subtreeReader.ReadToFollowing("Subject");
+                    do
+                    {
+                        try
+                        {
+                            subjects.Add((SubjectType) Enum.Parse(typeof(SubjectType), subtreeReader.ReadElementContentAsString()));
+                        }
+                        catch (InvalidOperationException ex) // catch this cranky-ass exception
+                        {
+                            subtreeReader.Close();
+                        }
+                    } while (!subtreeReader.EOF);
+
+                    reader.ReadToFollowing("Conversation");
+
+                    List<Message> conversation = new List<Message>();
+                    subtreeReader = reader.ReadSubtree();
+
+                    subtreeReader.ReadToFollowing("Message");
+                    do
+                    {
+                        try
+                        {
+                            conversation.Add(MessageRepository.Instance.Retrieve(subtreeReader.ReadElementContentAsInt()));
+                        }
+                        catch (InvalidOperationException ex)
+                        {
+                            subtreeReader.Close();
+                        }
+                    } while (!subtreeReader.EOF);
+
+                    reader.ReadToFollowing("IsAnonymous");
+
+                    bool isAnonymous = reader.ReadElementContentAsBoolean();
+
+                    inquiries.Add(new Inquiry(sender, receiver, title, subjects, conversation, isAnonymous));
                 }
+                while (reader.ReadToFollowing("Inquiry"));
+
+                Trace.WriteLine("Phew");
             }
         }
         #endregion
 
         #region CRUD
-        public Inquiry Create(Employee sender, Employee receiver, string title, SubjectType subject, Message message, bool isAnonymous)
+        public Inquiry Create(Employee sender, Employee receiver, string title, List<SubjectType> subjects, Message message, bool isAnonymous)
         {
-            Inquiry inquiry = new Inquiry(sender, receiver, title, subject, message, isAnonymous);
+            Inquiry inquiry = new Inquiry(sender, receiver, title, subjects, message, isAnonymous);
 
             inquiries.Add(inquiry);
-
-            using (StreamWriter sw = new StreamWriter(filePath, true))
-            {
-                sw.WriteLine(inquiry.GetCSVFormat());
-            }
+            
+            // save the entire repository again, to ensure the newly created inquiry is also saved.
+            // TODO: make it so the Save method is only called on window close...
+            Save();
 
             return inquiry;
         }

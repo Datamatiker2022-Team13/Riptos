@@ -44,7 +44,7 @@ namespace Whistleblower.ViewModels
         }
 
         public void DeleteSelectedInquiry () {
-            SelectedInquiry.DeleteInquiry(inquiryRepo);
+            SelectedInquiry.Delete();
             InquiryVMs.Remove(SelectedInquiry);
         }
     }
