@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Whistleblower"
         mc:Ignorable="d"
-        Title="InquiryHistoryForEmployee" Height="700" Width="1000">
+        Title="Historik" Height="700" Width="1000">
     <Grid>
         <StackPanel Width="725" Margin="253,4,22,603">
             <Label Content="Title.." HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="16" Padding="5,5,0,5"/>

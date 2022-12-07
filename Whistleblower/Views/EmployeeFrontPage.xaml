@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Whistleblower"
         mc:Ignorable="d"
-        Title="EployeeFrontPage" Height="700" Width="1000">
+        Title="Forside" Height="700" Width="1000">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" MinWidth="200"/>

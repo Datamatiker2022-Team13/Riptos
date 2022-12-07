@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Whistleblower.TEMP"
         mc:Ignorable="d"
-        Title="CreateInquiry" Height="450" Width="628">
+        Title="Opret henvendelse" Height="450" Width="628">
     <Grid>
         <StackPanel Margin="70,5,70,387">
             <Label Content="Titel" HorizontalContentAlignment="Center" Padding="0,2,0,2" HorizontalAlignment="Left"/>
