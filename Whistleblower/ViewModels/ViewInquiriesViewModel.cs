@@ -5,15 +5,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Whistleblower.Commands;
 using Whistleblower.Models;
 
 namespace Whistleblower.ViewModels
 {
     public class ViewInquiriesViewModel : INotifyPropertyChanged
     {
-        private EmployeeRepository employeeRepo = EmployeeRepository.Instance;
-        private MessageRepository messageRepo = MessageRepository.Instance;
-        private InquiryRepository inquiryRepo = InquiryRepository.Instance;
+        public EmployeeViewModel ActiveEmployeeVM { get; set; }
 
         public ObservableCollection<InquiryViewModel> InquiryVMs { get; set; }
 
@@ -26,12 +25,24 @@ namespace Whistleblower.ViewModels
             }
         }
 
+        #region Commands
+        public ShowCreateInquiryDialogCommand ShowCreateInquiryDialogCommand { get; } = new ShowCreateInquiryDialogCommand();
+        #endregion
+
         public ViewInquiriesViewModel () {
+            ActiveEmployeeVM = new EmployeeViewModel(EmployeeRepository.Instance.Retrieve(0));
+
             InquiryVMs = new ObservableCollection<InquiryViewModel>();
 
-            foreach (Inquiry inquiry in inquiryRepo.RetrieveAll()) {
-                InquiryViewModel inquiryVM = new InquiryViewModel(inquiry);
-                InquiryVMs.Add(inquiryVM);
+            foreach (Inquiry inquiry in InquiryRepository.Instance.RetrieveAll())
+            {
+                InquiryViewModel inquiryVM = null;
+
+                EmployeeViewModel receiverVM = new EmployeeViewModel(inquiry.Receiver);
+                EmployeeViewModel senderVM = new EmployeeViewModel(inquiry.Sender);
+
+                if (receiverVM.Equals(ActiveEmployeeVM) || senderVM.Equals(ActiveEmployeeVM))
+                    InquiryVMs.Add(new InquiryViewModel(inquiry));
             }
         }
 

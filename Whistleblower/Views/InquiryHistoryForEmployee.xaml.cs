@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Whistleblower.ViewModels;
 
 namespace Whistleblower
 {
@@ -22,6 +23,7 @@ namespace Whistleblower
         public InquiryHistoryForEmployee()
         {
             InitializeComponent();
+            DataContext = new ViewInquiriesViewModel();
         }
     }
 }
