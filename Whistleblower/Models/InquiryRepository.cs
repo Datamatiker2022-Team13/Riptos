@@ -187,5 +187,15 @@ namespace Whistleblower.Models
             inquiries.Remove(inquiry);
         }
         #endregion
+
+        public void AddMessageToInquiry(int inquiryID, int messageID)
+        {
+            Inquiry inquiry = Retrieve(inquiryID);
+            Message message = MessageRepository.Instance.Retrieve(messageID);
+
+            inquiry.Conversation.Add(message);
+
+            Save();
+        }
     }
 }

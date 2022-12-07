@@ -22,7 +22,7 @@ namespace Whistleblower.Commands
 
         public void Execute(object? parameter)
         {
-            if (parameter is EmployeeMainViewModel employeeMainVM)
+            if (parameter is ViewInquiriesViewModel employeeMainVM)
             {
                 // creates a higher coupling between the MainViewModel and the CreateFlowerSortDialogue,
                 // when MainViewModel is a parameter in the constructor of the CreateFlowerSortDialogue.

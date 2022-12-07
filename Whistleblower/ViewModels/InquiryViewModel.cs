@@ -5,7 +5,7 @@ namespace Whistleblower.ViewModels
 {
     public class InquiryViewModel
     {
-        private Inquiry source;
+        public Inquiry Source { get; }
 
         public Employee Sender { get; set; }
         public Employee Receiver { get; set; }
@@ -16,7 +16,7 @@ namespace Whistleblower.ViewModels
         public bool IsAnonymous { get; set; }
 
         public InquiryViewModel (Inquiry source) {
-            this.source = source;
+            this.Source = source;
 
             Sender = source.Sender;
             Receiver = source.Receiver;
@@ -28,7 +28,14 @@ namespace Whistleblower.ViewModels
         }
 
         public void Delete () {
-            InquiryRepository.Instance.Delete(source);
+            InquiryRepository.Instance.Delete(Source);
+        }
+
+        public void AddMessage (Message message)
+        {
+            Conversation.Add(message);
+
+            InquiryRepository.Instance.AddMessageToInquiry(Source.ID, message.ID);
         }
     }
 }

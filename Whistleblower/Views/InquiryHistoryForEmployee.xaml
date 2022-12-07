@@ -9,16 +9,16 @@
         ResizeMode="NoResize">
     <Grid>
         <StackPanel Width="725" Margin="253,4,22,603">
-            <Label Content="Title.." HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="16" Padding="5,5,0,5"/>
-            <Label Content="Emne.." FontSize="16" Padding="5,5,0,5" HorizontalAlignment="Left"/>
+            <Label Content="{Binding SelectedInquiry.Title}" HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="16" Padding="5,5,0,5"/>
+            <Label Content="{Binding SelectedInquiry.Subjects}" FontSize="16" Padding="5,5,0,5" HorizontalAlignment="Left"/>
         </StackPanel>
-        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="248,86,10,170">
+        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="248,86,10,170" ItemsSource="{Binding SelectedInquiry.Conversation}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Width="709">
-                        <Label Content="Afsender.."/>
-                        <TextBlock Text="Besked..." Height="100" Background="#FF728FDC" Foreground="White" Padding="5,5,0,0" FontFamily="Calibri" Margin="5,0,0,0"/>
-                        <Label Content="Dato.." HorizontalAlignment="Left"/>
+                        <Label Content="{Binding Sender}"/>
+                        <TextBlock Text="{Binding Content}" Height="100" Background="#FF728FDC" Foreground="White" Padding="5,5,0,0" FontFamily="Calibri" Margin="5,0,0,0"/>
+                        <Label Content="{Binding SendDateTime}" HorizontalAlignment="Left"/>
                         <Border BorderBrush="Black" BorderThickness="1" Height="1"/>
                     </StackPanel>
                 </DataTemplate>
@@ -26,8 +26,8 @@
         </ListBox>
 
         <StackPanel Margin="248,519,0,0">
-            <TextBox x:Name="txtReplayMessage" TextWrapping="Wrap" Text="" Width="720" Margin="0,10,0,0" Height="95" HorizontalAlignment="Left"/>
-            <Button x:Name="btnReplayMessage" Content="Send besked" Margin="0,5,32,0" Padding="5,5,5,5" UseLayoutRounding="True" Background="#FF4A86C6" Foreground="White" HorizontalAlignment="Right"/>
+            <TextBox x:Name="txtReplyMessage" Text="{Binding MessageContent, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="720" Margin="0,10,0,0" Height="95" HorizontalAlignment="Left"/>
+            <Button x:Name="btnReplyMessage" Command="{Binding SendMessageCommand}" CommandParameter="{Binding}" Content="Send besked" Margin="0,5,32,0" Padding="5,5,5,5" UseLayoutRounding="True" Background="#FF4A86C6" Foreground="White" HorizontalAlignment="Right"/>
         </StackPanel>
         <Rectangle Grid.Column="0" Fill="LightGray" Margin="0,0,750,0"/>
         <Grid Grid.Column="0" Margin="0,0,750,0">
@@ -45,16 +45,16 @@
                 <Button Grid.Column="1" x:Name="ProfileButton" Content="{Binding ActiveEmployeeVM.Name}" HorizontalAlignment="Left"  BorderBrush="{x:Null}" Background="{x:Null}"/>
             </Grid>
 
-            <ListBox Grid.Row="1" HorizontalAlignment="Center" x:Name="ListInquaries" ItemsSource="{Binding InquiryVMs}" d:ItemsSource="{d:SampleData ItemCount=5}" Width="250" Background="LightGray" >
+            <ListBox Grid.Row="1" HorizontalAlignment="Center" x:Name="ListInquaries" ItemsSource="{Binding InquiryVMs}" d:ItemsSource="{d:SampleData ItemCount=5}" Width="250" Background="LightGray" SelectedItem="{Binding SelectedInquiry}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="2,0,2,0" MinWidth="210" MaxWidth="210" Background="#FFF8F8F8">
                             <StackPanel Width="104">
                                 <Label Content="{Binding Title}" FontWeight="Bold" HorizontalAlignment="Left"/>
-                                <Label Content="{Binding Subject}" FontStyle="Italic" HorizontalAlignment="Left"/>
+                                <Label Content="{Binding Subjects}" FontStyle="Italic" HorizontalAlignment="Left"/>
                             </StackPanel>
                             <StackPanel Height="26" VerticalAlignment="Top" HorizontalAlignment="Right" MinWidth="100" AllowDrop="True">
-                                <Label Content="#123456" HorizontalAlignment="Right" Padding="0,5,0,0" Foreground="#FF9A9A9A" FontStyle="Italic"/>
+                                <Label Content="{Binding Source.ID}" HorizontalAlignment="Right" Padding="0,5,0,0" Foreground="#FF9A9A9A" FontStyle="Italic"/>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>

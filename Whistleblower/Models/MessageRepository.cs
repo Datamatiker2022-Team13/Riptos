@@ -93,10 +93,7 @@ namespace Whistleblower.Models
 
             messages.Add(message);
 
-            using (StreamWriter sw = new StreamWriter(filePath, true))
-            {
-                sw.WriteLine(message.GetCSVFormat());
-            }
+            Save();
 
             return message;
         }
