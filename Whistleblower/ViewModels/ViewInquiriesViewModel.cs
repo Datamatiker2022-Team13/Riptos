@@ -19,14 +19,27 @@ namespace Whistleblower.ViewModels
         private InquiryViewModel _selectedInquiry;
         public InquiryViewModel SelectedInquiry {
             get { return _selectedInquiry; }
-            set { 
+            set 
+            { 
                 _selectedInquiry = value;
                 OnPropertyChanged(nameof(SelectedInquiry));
             }
         }
 
+        private string _messageContent;
+        public string MessageContent
+        {
+            get { return _messageContent; }
+            set
+            {
+                _messageContent = value;
+                OnPropertyChanged(nameof(MessageContent));
+            }
+        }
+
         #region Commands
         public ShowCreateInquiryDialogCommand ShowCreateInquiryDialogCommand { get; } = new ShowCreateInquiryDialogCommand();
+        public SendMessageCommand SendMessageCommand { get; } = new SendMessageCommand();
         #endregion
 
         public ViewInquiriesViewModel () {

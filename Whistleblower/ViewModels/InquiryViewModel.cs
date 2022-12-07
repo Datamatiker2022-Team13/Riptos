@@ -30,5 +30,12 @@ namespace Whistleblower.ViewModels
         public void Delete () {
             InquiryRepository.Instance.Delete(Source);
         }
+
+        public void AddMessage (Message message)
+        {
+            Conversation.Add(message);
+
+            InquiryRepository.Instance.AddMessageToInquiry(Source.ID, message.ID);
+        }
     }
 }
