@@ -40,7 +40,18 @@ namespace Whistleblower.Commands
 
         public void Execute(object? parameter)
         {
-            Login vm = (Login)parameter;
+            if (parameter is LoginViewModel vm)
+            {
+                vm.Username = "hejsa";
+            }
+            else
+            {
+                throw new ArgumentException("Wrong input");
+            }
+
+
+
+
 
         }
 
