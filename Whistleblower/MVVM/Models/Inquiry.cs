@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Whistleblower.Models
+namespace Whistleblower.MVVM.Models
 {
     public class Inquiry
     {
@@ -32,7 +32,7 @@ namespace Whistleblower.Models
             IsAnonymous = isAnonymous;
         }
 
-        public Inquiry(Employee sender, Employee receiver, string title, List<SubjectType> subjects, Message message, bool isAnonymous) 
+        public Inquiry(Employee sender, Employee receiver, string title, List<SubjectType> subjects, Message message, bool isAnonymous)
             : this(sender, receiver, title, subjects, new List<Message>() { message }, isAnonymous) { }
 
         //public string GetCSVFormat () {

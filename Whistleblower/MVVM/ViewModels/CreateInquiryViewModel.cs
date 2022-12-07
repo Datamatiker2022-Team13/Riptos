@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Whistleblower.Models;
 using Whistleblower.Commands;
+using Whistleblower.MVVM.Models;
 
-namespace Whistleblower.ViewModels
+namespace Whistleblower.MVVM.ViewModels
 {
     public class CreateInquiryViewModel
     {

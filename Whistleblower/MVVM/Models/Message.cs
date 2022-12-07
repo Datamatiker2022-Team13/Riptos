@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Whistleblower.Models
+namespace Whistleblower.MVVM.Models
 {
     public class Message
     {

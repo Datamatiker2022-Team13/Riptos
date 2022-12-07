@@ -1,6 +1,6 @@
-﻿using Whistleblower.Models;
+﻿using Whistleblower.MVVM.Models;
 
-namespace Whistleblower.ViewModels
+namespace Whistleblower.MVVM.ViewModels
 {
     public class EmployeeViewModel
     {
@@ -14,7 +14,8 @@ namespace Whistleblower.ViewModels
 
         public string Username { get; set; }
 
-        public EmployeeViewModel (Employee source) {
+        public EmployeeViewModel(Employee source)
+        {
             Source = source;
 
             Name = source.Name;

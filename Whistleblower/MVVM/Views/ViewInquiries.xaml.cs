@@ -11,22 +11,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Whistleblower.MVVM.ViewModels;
 
-namespace Whistleblower
+namespace Whistleblower.MVVM.Views
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for ViewInquiries.xaml
     /// </summary>
-    public partial class Login : Window
+    public partial class ViewInquiries : Window
     {
-        public Login()
+        public ViewInquiries()
         {
             InitializeComponent();
-        }
-
-        private void bntLogin_Click(object sender, RoutedEventArgs e)
-        {
-
+            DataContext = new ViewInquiriesViewModel();
         }
     }
 }

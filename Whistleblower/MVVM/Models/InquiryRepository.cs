@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Xml;
 
-namespace Whistleblower.Models
+namespace Whistleblower.MVVM.Models
 {
     public class InquiryRepository
     {
@@ -91,7 +91,7 @@ namespace Whistleblower.Models
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.IgnoreWhitespace = true;
             settings.IgnoreComments = true; // most likely unnecessary
-            
+
             using (XmlReader reader = XmlReader.Create(filePath, settings))
             {
                 reader.ReadToFollowing("Inquiry");
@@ -111,7 +111,7 @@ namespace Whistleblower.Models
                     {
                         try
                         {
-                            subjects.Add((SubjectType) Enum.Parse(typeof(SubjectType), subtreeReader.ReadElementContentAsString()));
+                            subjects.Add((SubjectType)Enum.Parse(typeof(SubjectType), subtreeReader.ReadElementContentAsString()));
                         }
                         catch (InvalidOperationException ex) // catch this cranky-ass exception
                         {
@@ -156,7 +156,7 @@ namespace Whistleblower.Models
             Inquiry inquiry = new Inquiry(sender, receiver, title, subjects, message, isAnonymous);
 
             inquiries.Add(inquiry);
-            
+
             // save the entire repository again, to ensure the newly created inquiry is also saved.
             // TODO: make it so the Save method is only called on window close...
             Save();

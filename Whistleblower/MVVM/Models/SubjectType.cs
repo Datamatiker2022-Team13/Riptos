@@ -1,4 +1,4 @@
-﻿namespace Whistleblower.Models
+﻿namespace Whistleblower.MVVM.Models
 {
     public enum SubjectType
     {

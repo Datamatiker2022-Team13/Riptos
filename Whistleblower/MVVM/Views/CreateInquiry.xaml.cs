@@ -11,9 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Whistleblower.ViewModels;
+using Whistleblower.MVVM.ViewModels;
 
-namespace Whistleblower.TEMP
+namespace Whistleblower.MVVM.Views
 {
     /// <summary>
     /// Interaction logic for CreateInquiry.xaml

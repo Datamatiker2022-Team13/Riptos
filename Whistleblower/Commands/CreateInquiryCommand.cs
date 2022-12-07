@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Whistleblower.Models;
-using Whistleblower.ViewModels;
+using Whistleblower.MVVM.Models;
+using Whistleblower.MVVM.ViewModels;
 
 namespace Whistleblower.Commands
 {

@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Whistleblower.Commands;
-using Whistleblower.Models;
+using Whistleblower.MVVM.Models;
 
-namespace Whistleblower.ViewModels
+namespace Whistleblower.MVVM.ViewModels
 {
     public class ViewInquiriesViewModel : INotifyPropertyChanged
     {
@@ -17,10 +17,11 @@ namespace Whistleblower.ViewModels
         public ObservableCollection<InquiryViewModel> InquiryVMs { get; set; }
 
         private InquiryViewModel _selectedInquiry;
-        public InquiryViewModel SelectedInquiry {
+        public InquiryViewModel SelectedInquiry
+        {
             get { return _selectedInquiry; }
-            set 
-            { 
+            set
+            {
                 _selectedInquiry = value;
                 OnPropertyChanged(nameof(SelectedInquiry));
             }
@@ -42,7 +43,8 @@ namespace Whistleblower.ViewModels
         public SendMessageCommand SendMessageCommand { get; } = new SendMessageCommand();
         #endregion
 
-        public ViewInquiriesViewModel () {
+        public ViewInquiriesViewModel()
+        {
             ActiveEmployeeVM = new EmployeeViewModel(EmployeeRepository.Instance.Retrieve(0));
 
             InquiryVMs = new ObservableCollection<InquiryViewModel>();
@@ -60,14 +62,16 @@ namespace Whistleblower.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged (string propertyName) {
+        protected void OnPropertyChanged(string propertyName)
+        {
             PropertyChangedEventHandler propertyChanged = PropertyChanged;
 
             if (propertyChanged != null)
                 propertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void DeleteSelectedInquiry () {
+        public void DeleteSelectedInquiry()
+        {
             SelectedInquiry.Delete();
             InquiryVMs.Remove(SelectedInquiry);
         }

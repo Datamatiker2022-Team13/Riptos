@@ -4,27 +4,32 @@ using System.Globalization;
 using System.IO;
 using System.Xml;
 
-namespace Whistleblower.Models
+namespace Whistleblower.MVVM.Models
 {
     public class MessageRepository
     {
         #region Singleton
         private static MessageRepository _instance;
-        public static MessageRepository Instance {
-            get {
-                if (_instance == null) {
+        public static MessageRepository Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
                     _instance = new MessageRepository();
                     return _instance;
                 }
                 return _instance;
             }
 
-            private set {
+            private set
+            {
                 _instance = value;
             }
         }
 
-        private MessageRepository () {
+        private MessageRepository()
+        {
             messages = new List<Message>();
             Load();
         }

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Xml;
 
-namespace Whistleblower.Models
+namespace Whistleblower.MVVM.Models
 {
     public class EmployeeRepository
     {
@@ -85,7 +85,7 @@ namespace Whistleblower.Models
                     string password = reader.ReadElementContentAsString();
 
                     employees.Add(new Employee(name, isHR, username, password));
-                } 
+                }
                 while (reader.ReadToFollowing("Employee"));
             }
         }
