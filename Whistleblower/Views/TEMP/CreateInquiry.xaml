@@ -5,17 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Whistleblower.TEMP"
         mc:Ignorable="d"
-        Title="CreateInquiry" Height="450" Width="628">
+        Title="Opret henvendelse" Height="450" Width="628">
     <Grid>
-        <TextBox x:Name="txtTitle" HorizontalAlignment="Left" Margin="125,36,0,0" TextWrapping="Wrap" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-        <ComboBox HorizontalAlignment="Left" Margin="125,70,0,0" VerticalAlignment="Top" Width="87" ItemsSource="{Binding Subjects}" SelectedItem="{Binding ChosenSubject, Mode=TwoWay}"/>
-        <!--<StackPanel HorizontalAlignment="Left" Margin="240,72,0,0" VerticalAlignment="Top" Orientation="Horizontal" Height="20">
-            <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="Valgte emner: "/>
-            <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text=""/>
-        </StackPanel>-->
-        <TextBox x:Name="txtMessage" HorizontalAlignment="Left" Margin="125,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" Height="229" Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button x:Name="SendInquiryButton" Content="Send Henvendelse" HorizontalAlignment="Left" Margin="381,354,0,0" VerticalAlignment="Top" Height="37" Width="106" Click="SendInquiryButton_Click" Command="{Binding CreateInquiryCommand}" CommandParameter="{Binding}"/>
-        <CheckBox x:Name="chcAnou" Content="Skal beskede være anonym? " HorizontalAlignment="Left" Margin="198,365,0,0" VerticalAlignment="Top" IsChecked="{Binding IsAnonymous, Mode=TwoWay}"/>
-
+        <StackPanel Margin="70,5,70,387">
+            <Label Content="Titel" HorizontalContentAlignment="Center" Padding="0,2,0,2" HorizontalAlignment="Left"/>
+            <TextBox x:Name="txtTitle" TextWrapping="Wrap" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Height="21" HorizontalAlignment="Left" Width="488"/>
+        </StackPanel>
+        <StackPanel Margin="70,58,70,349" Width="626" Orientation="Horizontal">
+            <ComboBox HorizontalAlignment="Left" Width="137" ItemsSource="{Binding Subjects}" SelectedItem="{Binding ChosenSubject, Mode=TwoWay}"/>
+            <Label x:Name="lblChosenSubjects" Content="Valgte emner: " HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Margin="70,90,70,110">
+            <TextBox x:Name="txtMessage" TextWrapping="Wrap" Height="223" Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="70,329,70,43">
+            <CheckBox x:Name="chcAnou" Content="Skal beskede være anonym? " HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="{Binding IsAnonymous, Mode=TwoWay}" Margin="10,10,0,0"/>
+            <Button x:Name="SendInquiryButton" Content="Send Henvendelse" VerticalAlignment="Top" Height="37" Click="SendInquiryButton_Click" Command="{Binding CreateInquiryCommand}" CommandParameter="{Binding}" Background="#FF4A86C6" Foreground="White" HorizontalContentAlignment="Center" Padding="5,5,5,5" HorizontalAlignment="Right" Margin="190,10,0,0"/>
+        </StackPanel>
     </Grid>
 </Window>

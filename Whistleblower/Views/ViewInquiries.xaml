@@ -5,26 +5,54 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Whistleblower"
         mc:Ignorable="d"
-        Title="ViewInquiries" Height="450" Width="800">
+        Title="ViewInquiries" Height="700" Width="1000">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" MinWidth="200"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <Rectangle HorizontalAlignment="Left" Height="434" Stroke="Black" VerticalAlignment="Center" Width="247"/>
+        <StackPanel Grid.Column="2" x:Name="stpNewInquiry" Background="#FF60B9DB" VerticalAlignment="Top" HorizontalAlignment="Left" MinWidth="250" MaxWidth="400" MinHeight="250" MaxHeight="400">
+            <Label x:Name="lblTitle" Content="Titel..." Margin="5,0,0,0" Height="31.28" FontSize="16" FontWeight="DemiBold" Padding="1.3,5,5,5"/>
+            <Label x:Name="lblSubjects" Content="Emner..." Margin="5,0,0,0" Height="31.28" FontSize="12" Padding="0,5,5,5" FontStyle="Italic"/>
+            <TextBlock x:Name="txtMessage" TextWrapping="Wrap" Text="Besked..." Background="#FF60B9DB" HorizontalAlignment="Left" MinWidth="175" MaxWidth="200" MinHeight="100" RenderTransformOrigin="0.5,0.5" Margin="5,0,0,0">
+            </TextBlock>
+            <Label x:Name="lblDate" Content="Dato..." FontStyle="Italic" FontWeight="Thin" Width="50" HorizontalContentAlignment="Center" RenderTransformOrigin="-0.583,0.576" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+        </StackPanel>
+        <Rectangle Grid.Column="0" Fill="LightGray"/>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" VerticalAlignment="Center" HorizontalContentAlignment="Center" x:Name="lblName" Content="Velkommen: " FontWeight="DemiBold"/>
+                <Button Grid.Column="1" x:Name="ProfileButton" Content="{Binding ActiveEmployeeVM.Name}" HorizontalAlignment="Left"  BorderBrush="{x:Null}" Background="{x:Null}"/>
+            </Grid>
 
-        <ListBox x:Name="ListInquaries" ItemsSource="{Binding InquiryVMs}" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="1,61,562,86">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="{Binding Title}"/>
-                        <Label Content="{Binding Subject}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <Button x:Name="CreateInquiryButton" Command="{Binding ShowCreateInquiryDialogCommand}" CommandParameter="{Binding}" Content="Opret besked" HorizontalAlignment="Left" Margin="51,377,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.076,-0.424" Height="37" Width="137"/>
-        <Button x:Name="ProfileButton" Content="{Binding ActiveEmployeeVM.Name}" HorizontalAlignment="Left" Margin="98,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.381,-0.354" FontWeight="SemiBold" BorderBrush="{x:Null}" Background="{x:Null}"/>
-        <Label x:Name="lblName" Content="Velkommen: " HorizontalAlignment="Left" Margin="20,18,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblErrorMessage" Content="Fejl Besked..." HorizontalAlignment="Left" Margin="1329,855,0,0" VerticalAlignment="Top" Height="62" Width="251"/>
-        <Label Content="Whisteblower" HorizontalAlignment="Left" Margin="321,21,0,0" VerticalAlignment="Top" Width="413" HorizontalContentAlignment="Center" FontSize="20"/>
+            <ListBox Grid.Row="1" HorizontalAlignment="Center" x:Name="ListInquaries" ItemsSource="{Binding InquiryVMs}" d:ItemsSource="{d:SampleData ItemCount=5}" Width="250" Background="LightGray" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="2,0,2,0" MinWidth="210" MaxWidth="210" Background="#FFF8F8F8">
+                            <StackPanel Width="104">
+                                <Label Content="{Binding Title}" FontWeight="Bold" HorizontalAlignment="Left"/>
+                                <Label Content="{Binding Subject}" FontStyle="Italic" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                            <StackPanel Height="26" VerticalAlignment="Top" HorizontalAlignment="Right" MinWidth="100" AllowDrop="True">
+                                <Label Content="#123456" HorizontalAlignment="Right" Padding="0,5,0,0" Foreground="#FF9A9A9A" FontStyle="Italic"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
+            <Button Grid.Row="2" x:Name="CreateInquiryButton" Command="{Binding ShowCreateInquiryDialogCommand}" CommandParameter="{Binding}" Content="Opret Henvendelse" RenderTransformOrigin="2.076,-0.424" Margin="56,31,56,30" Foreground="White" BorderBrush="#FFC2C0F0" Padding="5,5,5,5" Background="#FF4A86C6" />
+        </Grid>
     </Grid>
 </Window>
