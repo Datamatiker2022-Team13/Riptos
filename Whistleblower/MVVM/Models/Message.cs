@@ -15,6 +15,7 @@ namespace Whistleblower.MVVM.Models
         public Employee Sender { get; private set; }
         public string Content { get; private set; }
         public DateTime SendDateTime { get; private set; }
+        public bool IsAnonymous { get; private set; }
 
         /// <summary>
         /// Default constructor.
@@ -22,19 +23,14 @@ namespace Whistleblower.MVVM.Models
         /// <param name="sender">The sender of the message.</param>
         /// <param name="content">The content of the message.</param>
         /// <param name="sendDateTime">The <see cref="DateTime"/> the message is sent.</param>
-        public Message(Employee sender, string content, DateTime sendDateTime)
+        public Message(Employee sender, string content, DateTime sendDateTime, bool isAnonymous)
         {
             ID = iDCount++;
 
             Sender = sender;
             Content = content;
             SendDateTime = sendDateTime;
-        }
-
-        public string GetCSVFormat()
-        {
-            string dateTimeFormatted = SendDateTime.ToString("dd-MM-yyyy HH.mm.ss", CultureInfo.CurrentCulture);
-            return string.Format($"{Sender.ID};{Content};{dateTimeFormatted}");
+            IsAnonymous = isAnonymous;
         }
     }
 }

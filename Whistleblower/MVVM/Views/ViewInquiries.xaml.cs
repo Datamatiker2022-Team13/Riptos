@@ -20,10 +20,10 @@ namespace Whistleblower.MVVM.Views
     /// </summary>
     public partial class ViewInquiries : Window
     {
-        public ViewInquiries()
+        public ViewInquiries(EmployeeViewModel activeEmployeeVM)
         {
             InitializeComponent();
-            DataContext = new ViewInquiriesViewModel();
+            DataContext = new ViewInquiriesViewModel(activeEmployeeVM);
         }
     }
 }

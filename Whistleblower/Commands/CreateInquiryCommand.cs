@@ -43,16 +43,19 @@ namespace Whistleblower.Commands
             if (parameter is CreateInquiryViewModel vm)
             {
                 // TODO : change how the receiver is determined
-                InquiryRepository.Instance.Create(
-                    vm.ActiveEmployee.Source,
+                Inquiry inquiry = InquiryRepository.Instance.Create(
+                    vm.ViewInquiriesVM.ActiveEmployeeVM.Source,
                     EmployeeRepository.Instance.Retrieve(1),
                     vm.Title,
                     new List<SubjectType>() { vm.ChosenSubject },
                     MessageRepository.Instance.Create(
-                        vm.ActiveEmployee.Source,
+                        vm.ViewInquiriesVM.ActiveEmployeeVM.Source,
                         vm.Content,
-                        DateTime.Now),
+                        DateTime.Now,
+                        true),
                     vm.IsAnonymous);
+
+                vm.ViewInquiriesVM.InquiryVMs.Add(new InquiryViewModel(inquiry));
             }
             else
             {

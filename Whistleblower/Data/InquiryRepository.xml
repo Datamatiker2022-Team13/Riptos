@@ -28,6 +28,44 @@
       <Message>8</Message>
       <Message>11</Message>
       <Message>12</Message>
+      <Message>14</Message>
+      <Message>18</Message>
+    </Conversation>
+    <IsAnonymous>true</IsAnonymous>
+  </Inquiry>
+  <Inquiry>
+    <Sender>2</Sender>
+    <Receiver>1</Receiver>
+    <Title>Jeg tabte i bordfodbold, og det plager mig</Title>
+    <Subjects>
+      <Subject>bullying</Subject>
+    </Subjects>
+    <Conversation>
+      <Message>15</Message>
+    </Conversation>
+    <IsAnonymous>false</IsAnonymous>
+  </Inquiry>
+  <Inquiry>
+    <Sender>0</Sender>
+    <Receiver>1</Receiver>
+    <Title>halløjsa, se her</Title>
+    <Subjects>
+      <Subject>bullying</Subject>
+    </Subjects>
+    <Conversation>
+      <Message>16</Message>
+    </Conversation>
+    <IsAnonymous>false</IsAnonymous>
+  </Inquiry>
+  <Inquiry>
+    <Sender>0</Sender>
+    <Receiver>1</Receiver>
+    <Title>Anonym besked</Title>
+    <Subjects>
+      <Subject>bullying</Subject>
+    </Subjects>
+    <Conversation>
+      <Message>17</Message>
     </Conversation>
     <IsAnonymous>true</IsAnonymous>
   </Inquiry>

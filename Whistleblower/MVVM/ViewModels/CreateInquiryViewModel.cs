@@ -10,7 +10,7 @@ namespace Whistleblower.MVVM.ViewModels
 {
     public class CreateInquiryViewModel
     {
-        public EmployeeViewModel ActiveEmployee { get; set; }
+        public ViewInquiriesViewModel ViewInquiriesVM { get; set; }
 
         public string Title { get; set; }
         public SubjectType Subject { get; set; }
@@ -25,9 +25,9 @@ namespace Whistleblower.MVVM.ViewModels
         public CreateInquiryCommand CreateInquiryCommand { get; } = new CreateInquiryCommand();
         #endregion
 
-        public CreateInquiryViewModel(EmployeeViewModel activeEmployee)
+        public CreateInquiryViewModel(ViewInquiriesViewModel viewInquiriesVM)
         {
-            ActiveEmployee = activeEmployee;
+            ViewInquiriesVM = viewInquiriesVM;
 
             SubjectType[] subjectsArray = Enum.GetValues<SubjectType>();
             Subjects = subjectsArray.ToList();

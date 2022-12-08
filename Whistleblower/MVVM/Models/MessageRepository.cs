@@ -59,6 +59,7 @@ namespace Whistleblower.MVVM.Models
                     writer.WriteElementString("Sender", message.Sender.ID.ToString());
                     writer.WriteElementString("Content", message.Content);
                     writer.WriteElementString("SendDateTime", message.SendDateTime.ToString("dd-MM-yyyy HH.mm.ss", CultureInfo.CurrentCulture));
+                    writer.WriteElementString("IsAnonymous", message.IsAnonymous.ToString().ToLower());
 
                     writer.WriteEndElement();
                 }
@@ -83,8 +84,9 @@ namespace Whistleblower.MVVM.Models
                     Employee sender = EmployeeRepository.Instance.Retrieve(reader.ReadElementContentAsInt());
                     string content = reader.ReadElementContentAsString();
                     DateTime sendDateTime = DateTime.ParseExact(reader.ReadElementContentAsString(), "dd-MM-yyyy HH.mm.ss", CultureInfo.CurrentCulture);
+                    bool isAnonymous = reader.ReadElementContentAsBoolean();
 
-                    messages.Add(new Message(sender, content, sendDateTime));
+                    messages.Add(new Message(sender, content, sendDateTime, isAnonymous));
                 }
                 while (reader.ReadToFollowing("Message"));
             }
@@ -92,9 +94,9 @@ namespace Whistleblower.MVVM.Models
         #endregion
 
         #region CRUD
-        public Message Create(Employee sender, string content, DateTime sendDateTime)
+        public Message Create(Employee sender, string content, DateTime sendDateTime, bool isAnonymous)
         {
-            Message message = new Message(sender, content, sendDateTime);
+            Message message = new Message(sender, content, sendDateTime, isAnonymous);
 
             messages.Add(message);
 

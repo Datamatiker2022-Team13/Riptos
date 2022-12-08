@@ -10,7 +10,7 @@
         " Width="800">
     <Grid>
         <Label Content="Username" HorizontalAlignment="Left" Margin="356,133,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="SemiBold"/>
-        <Button x:Name="bntLogin" Content="Login" HorizontalAlignment="Left" Margin="293,405,0,0" VerticalAlignment="Top" Click="bntLogin_Click" Height="40" Width="197" Command="{Binding LoginBNTCommand}" CommandParameter="{Binding}"/>
+        <Button x:Name="bntLogin" Content="Login" HorizontalAlignment="Left" Margin="293,405,0,0" VerticalAlignment="Top" Height="40" Width="197" Command="{Binding LoginBNTCommand}" CommandParameter="{Binding}" Click="bntLogin_Click"/>
         <Label Content="Password" HorizontalAlignment="Left" Margin="359,221,0,0" VerticalAlignment="Top" FontWeight="SemiBold" FontSize="16"/>
         <TextBox x:Name="txtUserName" HorizontalAlignment="Left" Margin="293,169,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="197" Height="29" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
         <Label x:Name="lblLoginError" HorizontalAlignment="Left" Margin="293,303,0,0" VerticalAlignment="Top" Height="80" Width="197" Content="Error message her...."/>

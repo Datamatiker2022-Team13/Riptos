@@ -20,14 +20,10 @@ namespace Whistleblower.MVVM.Views
     /// </summary>
     public partial class CreateInquiry : Window
     {
-        public CreateInquiryViewModel VM { get; set; }
-
-        public CreateInquiry(EmployeeViewModel activeEmployee)
+        public CreateInquiry(ViewInquiriesViewModel viewInquiriesVM)
         {
             InitializeComponent();
-
-            VM = new CreateInquiryViewModel(activeEmployee);
-            DataContext = VM;
+            DataContext = new CreateInquiryViewModel(viewInquiriesVM);
         }
 
         private void SendInquiryButton_Click(object sender, RoutedEventArgs e)

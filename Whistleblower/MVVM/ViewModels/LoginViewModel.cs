@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Whistleblower.Commands;
+﻿using Whistleblower.Commands;
 
-namespace Whistleblower.ViewModels
+namespace Whistleblower.MVVM.ViewModels
 {
     public class LoginViewModel
     {
@@ -13,10 +8,7 @@ namespace Whistleblower.ViewModels
         public string Password { get; set; }    
 
         #region Commands
-        public LoginBNTCommand  LoginBNTCommand { get; } = new LoginBNTCommand();
+        public TryLoginCommand  LoginBNTCommand { get; } = new TryLoginCommand();
         #endregion
-
-
-
     }
 }

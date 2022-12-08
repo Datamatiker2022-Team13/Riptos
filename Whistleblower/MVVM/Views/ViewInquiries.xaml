@@ -16,7 +16,20 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Width="709">
-                        <Label Content="{Binding Sender.Name}"/>
+                        <Label>
+                            <Label.Style>
+                                <Style TargetType="{x:Type Label}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsAnonymous}" Value="True">
+                                            <Setter Property="Content" Value="Anonym"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsAnonymous}" Value="False">
+                                            <Setter Property="Content" Value="{Binding Sender.Name}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Label.Style>
+                        </Label>
                         <TextBlock Text="{Binding Content}" Height="100" Background="#FF728FDC" Foreground="White" Padding="5,5,0,0" FontFamily="Calibri" Margin="5,0,0,0"/>
                         <Label Content="{Binding SendDateTime}" HorizontalAlignment="Left"/>
                         <Border BorderBrush="Black" BorderThickness="1" Height="1"/>

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using Whistleblower.Commands;
 using Whistleblower.MVVM.Models;
 
@@ -43,9 +44,9 @@ namespace Whistleblower.MVVM.ViewModels
         public SendMessageCommand SendMessageCommand { get; } = new SendMessageCommand();
         #endregion
 
-        public ViewInquiriesViewModel()
+        public ViewInquiriesViewModel(EmployeeViewModel activeEmployeeVM)
         {
-            ActiveEmployeeVM = new EmployeeViewModel(EmployeeRepository.Instance.Retrieve(0));
+            ActiveEmployeeVM = activeEmployeeVM;
 
             InquiryVMs = new ObservableCollection<InquiryViewModel>();
 

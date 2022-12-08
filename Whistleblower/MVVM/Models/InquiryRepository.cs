@@ -10,6 +10,7 @@ namespace Whistleblower.MVVM.Models
     {
         #region Singleton
         private static InquiryRepository? _instance;
+
         /// <summary>
         /// NOT THREAD SAFE
         /// </summary>

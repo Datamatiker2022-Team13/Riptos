@@ -4,70 +4,114 @@
     <Sender>2</Sender>
     <Content>wowsa det her er min nye henvendelses besked</Content>
     <SendDateTime>01-12-2022 22.58.13</SendDateTime>
+    <IsAnonymous>true</IsAnonymous>
   </Message>
   <Message>
     <Sender>0</Sender>
     <Content>Jeg syntes bare det er mærkeligt at jeg er en myg og du er en ugle, men morten er en mand.</Content>
     <SendDateTime>01-12-2022 23.00.45</SendDateTime>
+    <IsAnonymous>true</IsAnonymous>
   </Message>
   <Message>
     <Sender>0</Sender>
     <Content>cgvh bjopoå214ík 1¨+'2i4ke 1</Content>
     <SendDateTime>01-12-2022 23.02.26</SendDateTime>
+    <IsAnonymous>true</IsAnonymous>
   </Message>
   <Message>
     <Sender>0</Sender>
     <Content>Jeg syntes altså Jacksons børn er syge hele tiden</Content>
     <SendDateTime>02-12-2022 08.41.22</SendDateTime>
+    <IsAnonymous>false</IsAnonymous>
   </Message>
   <Message>
     <Sender>0</Sender>
     <Content>endnu en test</Content>
     <SendDateTime>02-12-2022 08.49.07</SendDateTime>
+    <IsAnonymous>false</IsAnonymous>
   </Message>
   <Message>
     <Sender>0</Sender>
     <Content>her</Content>
     <SendDateTime>02-12-2022 08.51.30</SendDateTime>
+    <IsAnonymous>false</IsAnonymous>
   </Message>
   <Message>
     <Sender>0</Sender>
     <Content>Ja manner</Content>
     <SendDateTime>06-12-2022 19.26.06</SendDateTime>
+    <IsAnonymous>false</IsAnonymous>
   </Message>
   <Message>
     <Sender>0</Sender>
     <Content>Se lige her, jeg tror sørme det virker!</Content>
     <SendDateTime>06-12-2022 20.54.09</SendDateTime>
+    <IsAnonymous>false</IsAnonymous>
   </Message>
   <Message>
     <Sender>0</Sender>
     <Content>Wowsa, jeg tror sørme at det virker denne gang!</Content>
     <SendDateTime>06-12-2022 20.55.04</SendDateTime>
+    <IsAnonymous>false</IsAnonymous>
   </Message>
   <Message>
     <Sender>0</Sender>
     <Content>Hejsa du der!</Content>
     <SendDateTime>07-12-2022 12.27.51</SendDateTime>
+    <IsAnonymous>false</IsAnonymous>
   </Message>
   <Message>
     <Sender>0</Sender>
     <Content>a</Content>
     <SendDateTime>07-12-2022 12.28.41</SendDateTime>
+    <IsAnonymous>false</IsAnonymous>
   </Message>
   <Message>
     <Sender>0</Sender>
     <Content>Wowsa, se her</Content>
     <SendDateTime>07-12-2022 12.36.46</SendDateTime>
+    <IsAnonymous>false</IsAnonymous>
   </Message>
   <Message>
     <Sender>0</Sender>
     <Content>Og se så den her effekt</Content>
     <SendDateTime>07-12-2022 12.38.13</SendDateTime>
+    <IsAnonymous>false</IsAnonymous>
   </Message>
   <Message>
     <Sender>1</Sender>
     <Content>Mikkel jeg kan godt forstå at du er frustreret. Men Frede har altså bare slimede hinder... 😢</Content>
     <SendDateTime>07-12-2022 12.53.17</SendDateTime>
+    <IsAnonymous>false</IsAnonymous>
+  </Message>
+  <Message>
+    <Sender>2</Sender>
+    <Content>Se min nye besked</Content>
+    <SendDateTime>07-12-2022 13.30.29</SendDateTime>
+    <IsAnonymous>false</IsAnonymous>
+  </Message>
+  <Message>
+    <Sender>2</Sender>
+    <Content>Capper han havde ild i håndledet, og jeg kunne ikke hamle op.</Content>
+    <SendDateTime>07-12-2022 13.31.15</SendDateTime>
+    <IsAnonymous>false</IsAnonymous>
+  </Message>
+  <Message>
+    <Sender>0</Sender>
+    <Content>Miansmdoaisd</Content>
+    <SendDateTime>07-12-2022 13.42.46</SendDateTime>
+    <IsAnonymous>false</IsAnonymous>
+  </Message>
+  <Message>
+    <Sender>0</Sender>
+    <Content>test</Content>
+    <SendDateTime>07-12-2022 14.04.37</SendDateTime>
+    <IsAnonymous>true</IsAnonymous>
+  </Message>
+  <Message>
+    <Sender>1</Sender>
+    <Content>Jeg har set det her</Content>
+    <SendDateTime>08-12-2022 08.23.37</SendDateTime>
+    <IsAnonymous>true</IsAnonymous>
   </Message>
 </Messages>

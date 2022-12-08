@@ -12,8 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Whistleblower.Models;
-using Whistleblower.ViewModels;
+using Whistleblower.MVVM.Views;
+using Whistleblower.MVVM.ViewModels;
+using Whistleblower.MVVM.Models;
+using System.Diagnostics;
 
 namespace Whistleblower.MVVM.Views
 {
@@ -26,7 +28,6 @@ namespace Whistleblower.MVVM.Views
 
         public Login()
         {
-            
             InitializeComponent();
 
             VM = new LoginViewModel();
@@ -35,11 +36,24 @@ namespace Whistleblower.MVVM.Views
 
         private void bntLogin_Click(object sender, RoutedEventArgs e)
         {
-            SendInquary pg = new SendInquary();
-            Close();
-            pg.Show();
+            Employee activeEmployee = null;
+
+            foreach (Employee employee in EmployeeRepository.Instance.RetrieveAll())
+            {
+                if (employee.Username.Equals(VM.Username) && employee.Password.Equals(VM.Password))
+                {
+                    activeEmployee = employee;
+                }
+            }
+
+            if (activeEmployee == null)
+                Trace.WriteLine("Login attempt unsuccesfull 😢");
+            else
+            {
+                ViewInquiries page = new ViewInquiries(new EmployeeViewModel(activeEmployee));
+                page.Show();
+                Close();
+            }
         }
-
-
     }
 }

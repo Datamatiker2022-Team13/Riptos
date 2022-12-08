@@ -21,11 +21,11 @@ namespace Whistleblower.Commands
 
         public void Execute(object? parameter)
         {
-            if (parameter is ViewInquiriesViewModel employeeMainVM)
+            if (parameter is ViewInquiriesViewModel viewInquiriesVM)
             {
                 // creates a higher coupling between the MainViewModel and the CreateFlowerSortDialogue,
                 // when MainViewModel is a parameter in the constructor of the CreateFlowerSortDialogue.
-                CreateInquiry dialogue = new CreateInquiry(employeeMainVM.ActiveEmployeeVM);
+                CreateInquiry dialogue = new CreateInquiry(viewInquiriesVM);
                 Trace.WriteLine("Opened a dialogue for creating an inquiry.");
                 dialogue.ShowDialog();
             }
