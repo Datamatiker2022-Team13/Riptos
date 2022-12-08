@@ -10,7 +10,10 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Whistleblower.Models;
+using Whistleblower.ViewModels;
 
 namespace Whistleblower.MVVM.Views
 {
@@ -19,14 +22,24 @@ namespace Whistleblower.MVVM.Views
     /// </summary>
     public partial class Login : Window
     {
+        public LoginViewModel VM;
+
         public Login()
         {
+            
             InitializeComponent();
+
+            VM = new LoginViewModel();
+            DataContext = VM;
         }
 
         private void bntLogin_Click(object sender, RoutedEventArgs e)
         {
-
+            SendInquary pg = new SendInquary();
+            Close();
+            pg.Show();
         }
+
+
     }
 }
