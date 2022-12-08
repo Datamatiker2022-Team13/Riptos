@@ -5,22 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Whistleblower"
         mc:Ignorable="d"
-        Title="Opret henvendelse" Height="450" Width="628">
+        Title="Opret henvendelse" Height="413" Width="628" ResizeMode="NoResize">
     <Grid>
-        <StackPanel Margin="70,5,70,387">
-            <Label Content="Titel" HorizontalContentAlignment="Center" Padding="0,2,0,2" HorizontalAlignment="Left"/>
-            <TextBox x:Name="txtTitle" TextWrapping="Wrap" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Height="21" HorizontalAlignment="Left" Width="488"/>
+        <StackPanel>
+            <StackPanel Margin="70,5,0,0" HorizontalAlignment="Left" MinWidth="500" Height="56" Width="480">
+                <Label Content="Titel" HorizontalContentAlignment="Center" Padding="0,2,0,2" HorizontalAlignment="Left"/>
+                <TextBox x:Name="txtTitle" TextWrapping="Wrap" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Height="21" HorizontalAlignment="Left" Width="500" MinWidth="500"/>
+            </StackPanel>
+            <StackPanel Margin="70,0,0,0" Orientation="Horizontal" MinWidth="41" HorizontalAlignment="Left">
+                <ComboBox Width="137" ItemsSource="{Binding Subjects}" SelectedItem="{Binding ChosenSubject, Mode=TwoWay}" Height="27" HorizontalAlignment="Left"/>
+                <Label x:Name="lblChosenSubjects" Content="Valgte emner: " HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            </StackPanel>
+            <StackPanel Margin="70,0,0,0" HorizontalAlignment="Left">
+                <TextBox x:Name="txtMessage" TextWrapping="Wrap" Height="223" Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0" MinWidth="500"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="70,0,0,0" HorizontalAlignment="Left">
+                <CheckBox x:Name="chcAnou" Content="Skal beskede være anonym? " HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="{Binding IsAnonymous, Mode=TwoWay}" Margin="10,10,0,0"/>
+                <Button x:Name="SendInquiryButton" Content="Send Henvendelse" VerticalAlignment="Top" Height="37" Click="SendInquiryButton_Click" Command="{Binding CreateInquiryCommand}" CommandParameter="{Binding}" Background="#FF4A86C6" Foreground="White" HorizontalContentAlignment="Center" Padding="5,5,5,5" HorizontalAlignment="Right" Margin="190,10,0,0"/>
+            </StackPanel>
         </StackPanel>
-        <StackPanel Margin="70,58,70,349" Width="626" Orientation="Horizontal">
-            <ComboBox HorizontalAlignment="Left" Width="137" ItemsSource="{Binding Subjects}" SelectedItem="{Binding ChosenSubject, Mode=TwoWay}"/>
-            <Label x:Name="lblChosenSubjects" Content="Valgte emner: " HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        </StackPanel>
-        <StackPanel Margin="70,90,70,110">
-            <TextBox x:Name="txtMessage" TextWrapping="Wrap" Height="223" Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="70,329,70,43">
-            <CheckBox x:Name="chcAnou" Content="Skal beskede være anonym? " HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="{Binding IsAnonymous, Mode=TwoWay}" Margin="10,10,0,0"/>
-            <Button x:Name="SendInquiryButton" Content="Send Henvendelse" VerticalAlignment="Top" Height="37" Click="SendInquiryButton_Click" Command="{Binding CreateInquiryCommand}" CommandParameter="{Binding}" Background="#FF4A86C6" Foreground="White" HorizontalContentAlignment="Center" Padding="5,5,5,5" HorizontalAlignment="Right" Margin="190,10,0,0"/>
-        </StackPanel>
+
     </Grid>
 </Window>
