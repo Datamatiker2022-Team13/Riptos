@@ -4,6 +4,7 @@
     {
         bullying,
         discrimination,
-        harassment
+        harassment,
+        other
     }
 }
