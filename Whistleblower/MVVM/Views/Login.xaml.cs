@@ -24,35 +24,35 @@ namespace Whistleblower.MVVM.Views
     /// </summary>
     public partial class Login : Window
     {
-        public LoginViewModel VM;
-
         public Login()
         {
             InitializeComponent();
 
-            VM = new LoginViewModel();
-            DataContext = VM;
+            DataContext = new LoginViewModel();
         }
 
-        private void bntLogin_Click(object sender, RoutedEventArgs e)
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            Employee activeEmployee = null;
-
-            foreach (Employee employee in EmployeeRepository.Instance.RetrieveAll())
+            if (DataContext is LoginViewModel vm)
             {
-                if (employee.Username.Equals(VM.Username) && employee.Password.Equals(VM.Password))
+                Employee activeEmployee = null;
+
+                foreach (Employee employee in EmployeeRepository.Instance.RetrieveAll())
                 {
-                    activeEmployee = employee;
+                    if (employee.Username.Equals(vm.Username) && employee.Password.Equals(vm.Password))
+                    {
+                        activeEmployee = employee;
+                    }
                 }
-            }
 
-            if (activeEmployee == null)
-                Trace.WriteLine("Login attempt unsuccesfull 😢");
-            else
-            {
-                ViewInquiries page = new ViewInquiries(new EmployeeViewModel(activeEmployee));
-                page.Show();
-                Close();
+                if (activeEmployee == null)
+                    Trace.WriteLine("Login attempt unsuccesfull 😢");
+                else
+                {
+                    ViewInquiries page = new ViewInquiries(new EmployeeViewModel(activeEmployee));
+                    page.Show();
+                    Close();
+                }
             }
         }
     }

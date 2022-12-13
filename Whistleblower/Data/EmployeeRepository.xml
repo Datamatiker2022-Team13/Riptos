@@ -4,18 +4,18 @@
     <Name>Cykel Myggen Mikkel</Name>
     <IsHR>false</IsHR>
     <Username>bzz</Username>
-    <Password>CapperTheSick</Password>
+    <Password>mikkel</Password>
   </Employee>
   <Employee>
     <Name>Uglen Ulf</Name>
     <IsHR>true</IsHR>
     <Username>zzz</Username>
-    <Password>JonathanTheSick</Password>
+    <Password>ulf</Password>
   </Employee>
   <Employee>
     <Name>Frøen Frede</Name>
     <IsHR>false</IsHR>
     <Username>quack</Username>
-    <Password>JacksonsGirlIsSick</Password>
+    <Password>frede</Password>
   </Employee>
 </Employees>

@@ -13,13 +13,12 @@ namespace Whistleblower.MVVM.ViewModels
         public ViewInquiriesViewModel ViewInquiriesVM { get; set; }
 
         public string Title { get; set; }
-        public SubjectType Subject { get; set; }
+        public SubjectType ChosenSubject { get; set; }
         public string Content { get; set; }
         public bool IsAnonymous { get; set; }
 
         public List<SubjectType> Subjects { get; set; }
 
-        public SubjectType ChosenSubject { get; set; }
 
         #region Commands
         public CreateInquiryCommand CreateInquiryCommand { get; } = new CreateInquiryCommand();

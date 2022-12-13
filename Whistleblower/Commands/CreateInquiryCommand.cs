@@ -52,7 +52,7 @@ namespace Whistleblower.Commands
                         vm.ViewInquiriesVM.ActiveEmployeeVM.Source,
                         vm.Content,
                         DateTime.Now,
-                        true),
+                        vm.IsAnonymous),
                     vm.IsAnonymous);
 
                 vm.ViewInquiriesVM.InquiryVMs.Add(new InquiryViewModel(inquiry));
