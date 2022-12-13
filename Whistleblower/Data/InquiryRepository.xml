@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Inquiries>
+  <Inquiry>
+    <Sender>0</Sender>
+    <Receiver>1</Receiver>
+    <Title>se her min ven</Title>
+    <Subjects>
+      <Subject>discrimination</Subject>
+      <Subject>harassment</Subject>
+      <Subject>bullying</Subject>
+    </Subjects>
+    <Conversation>
+      <Message>1</Message>
+      <Message>3</Message>
+      <Message>4</Message>
+      <Message>13</Message>
+    </Conversation>
+    <IsAnonymous>false</IsAnonymous>
+  </Inquiry>
+  <Inquiry>
+    <Sender>2</Sender>
+    <Receiver>1</Receiver>
+    <Title>Test henvendelse</Title>
+    <Subjects>
+      <Subject>discrimination</Subject>
+    </Subjects>
+    <Conversation>
+      <Message>8</Message>
+      <Message>11</Message>
+      <Message>12</Message>
+      <Message>14</Message>
+      <Message>18</Message>
+    </Conversation>
+    <IsAnonymous>true</IsAnonymous>
+  </Inquiry>
+  <Inquiry>
+    <Sender>2</Sender>
+    <Receiver>1</Receiver>
+    <Title>Jeg tabte i bordfodbold, og det plager mig</Title>
+    <Subjects>
+      <Subject>bullying</Subject>
+    </Subjects>
+    <Conversation>
+      <Message>15</Message>
+    </Conversation>
+    <IsAnonymous>false</IsAnonymous>
+  </Inquiry>
+  <Inquiry>
+    <Sender>0</Sender>
+    <Receiver>1</Receiver>
+    <Title>halløjsa, se her</Title>
+    <Subjects>
+      <Subject>bullying</Subject>
+    </Subjects>
+    <Conversation>
+      <Message>16</Message>
+    </Conversation>
+    <IsAnonymous>false</IsAnonymous>
+  </Inquiry>
+  <Inquiry>
+    <Sender>0</Sender>
+    <Receiver>1</Receiver>
+    <Title>Anonym besked</Title>
+    <Subjects>
+      <Subject>bullying</Subject>
+    </Subjects>
+    <Conversation>
+      <Message>17</Message>
+    </Conversation>
+    <IsAnonymous>true</IsAnonymous>
+  </Inquiry>
+</Inquiries>

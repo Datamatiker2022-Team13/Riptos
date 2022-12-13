@@ -1,4 +1,4 @@
-﻿namespace Whistleblower.Models
+﻿namespace Whistleblower.MVVM.Models
 {
     public class Employee
     {
@@ -15,7 +15,7 @@
         public string Username { get; set; }
         public string Password { get; set; }
 
-        public Employee (string name, bool isHR, string username, string password)
+        public Employee(string name, bool isHR, string username, string password)
         {
             ID = iDCount++;
 
@@ -26,7 +26,8 @@
             Password = password;
         }
 
-        public string GetCSVFormat () {
+        public string GetCSVFormat()
+        {
             return string.Format($"{Name};{IsHR};{Username};{Password}");
         }
     }

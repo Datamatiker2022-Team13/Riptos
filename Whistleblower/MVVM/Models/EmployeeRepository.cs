@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Xml;
 
-namespace Whistleblower.Models
+namespace Whistleblower.MVVM.Models
 {
     public class EmployeeRepository
     {
@@ -32,7 +33,7 @@ namespace Whistleblower.Models
         }
         #endregion
 
-        private string filePath = Path.GetFullPath(@"..\..\..\Data\EmployeeRepository.txt");
+        private string filePath = Path.GetFullPath(@"..\..\..\Data\EmployeeRepository.xml");
 
         private List<Employee> employees;
 
@@ -42,35 +43,50 @@ namespace Whistleblower.Models
             if (!File.Exists(filePath))
                 File.Create(filePath).Close();
 
-            using (StreamWriter sw = new StreamWriter(filePath, false))
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+
+            using (XmlWriter writer = XmlWriter.Create(filePath, settings))
             {
+                writer.WriteStartDocument();
+                writer.WriteStartElement("Employees");
                 foreach (Employee employee in employees)
                 {
-                    string encryptedString = EncryptionHandler.EncryptString(employee.GetCSVFormat());
-                    sw.WriteLine(encryptedString);
+                    writer.WriteStartElement("Employee");
+
+                    writer.WriteElementString("Name", employee.Name);
+                    writer.WriteElementString("IsHR", employee.IsHR.ToString().ToLower());
+                    writer.WriteElementString("Username", employee.Username);
+                    writer.WriteElementString("Password", employee.Password);
+
+                    writer.WriteEndElement();
                 }
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
             }
         }
 
         public void Load()
         {
-            using (StreamReader sr = new StreamReader(filePath))
+            XmlReaderSettings settings = new XmlReaderSettings();
+            settings.IgnoreWhitespace = true;
+            settings.IgnoreComments = true;
+
+            using (XmlReader reader = XmlReader.Create(filePath, settings))
             {
-                while (!sr.EndOfStream)
+                reader.ReadToFollowing("Employee");
+                do
                 {
-                    //string decryptedEmployee = encryptor.DecryptString(sr.ReadLine());
-                    string decryptedString = sr.ReadLine();
-                    string[] parts = decryptedString.Split(';');
+                    reader.ReadToFollowing("Name");
 
-                    string name = parts[0];
-                    bool isHR = bool.Parse(parts[1]);
-                    string username = parts[2];
-                    string password = parts[3];
+                    string name = reader.ReadElementContentAsString();
+                    bool isHR = reader.ReadElementContentAsBoolean();
+                    string username = reader.ReadElementContentAsString();
+                    string password = reader.ReadElementContentAsString();
 
-                    Employee employee = new Employee(name, isHR, username, password);
-
-                    employees.Add(employee);
+                    employees.Add(new Employee(name, isHR, username, password));
                 }
+                while (reader.ReadToFollowing("Employee"));
             }
         }
         #endregion
@@ -125,9 +141,9 @@ namespace Whistleblower.Models
             }
         }
 
-        public void Delete(Employee employee)
+        public void Delete(int id)
         {
-            employees.Remove(employee);
+            employees.Remove(Retrieve(id));
         }
         #endregion
     }
