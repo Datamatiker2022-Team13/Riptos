@@ -46,7 +46,7 @@ namespace Whistleblower.MVVM.Views
                 }
 
                 if (activeEmployee == null)
-                    Trace.WriteLine("Login attempt unsuccesfull 😢");
+                    lblLoginError.Content = "kontoen findes ikke - Er brugernavn eller password correct";
                 else
                 {
                     ViewInquiries page = new ViewInquiries(new EmployeeViewModel(activeEmployee));
