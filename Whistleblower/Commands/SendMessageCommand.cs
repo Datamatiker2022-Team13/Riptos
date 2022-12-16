@@ -42,7 +42,12 @@ namespace Whistleblower.Commands
         {
             if (parameter is ViewInquiriesViewModel vm)
             {
-                Message reply = MessageRepository.Instance.Create(vm.ActiveEmployeeVM.Source, vm.MessageContent, DateTime.Now, true);
+                Message reply = MessageRepository.Instance.Create(
+                    vm.ActiveEmployeeVM.Source, 
+                    vm.MessageContent, 
+                    DateTime.Now, 
+                    true);
+
                 vm.SelectedInquiry.AddMessage(reply);
 
                 vm.MessageContent = string.Empty;
